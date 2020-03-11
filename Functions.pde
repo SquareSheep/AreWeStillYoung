@@ -1,6 +1,11 @@
 /*
 Useful general-purpose functions
 */
+
+boolean beatInRange(float minBeat, float maxBeat) {
+	return currBeat >= minBeat && currBeat < maxBeat;
+}
+
 int ceilR(float x) {
 	if (x > 0) {
 		return ceil(x);

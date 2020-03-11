@@ -452,7 +452,7 @@ class IColor extends AColor {
   }
 
   IColor() {
-    this(255,255,255,255, 0,0,0,0, -1);
+    this(125,125,125,255, 0,0,0,0, -1);
   }
 
   IColor copy() {
