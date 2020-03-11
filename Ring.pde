@@ -1,6 +1,7 @@
 float ringWMass = 30;
 float ringWVMult = 0.5;
-float ringWThreshold = 0.9;
+float ringWThreshold = 0.98;
+float ringWThreshold2 = 0.97;
 class Ring extends Entity {
 	SpringValue w = new SpringValue(0, ringWVMult, ringWMass);
 	float wMax = 1000;
@@ -39,8 +40,8 @@ class Ring extends Entity {
 			case 0:
 			fillStyle.strokeStyle();
 			noFill();
-			strokeWeight((wMax*ringWThreshold-w.x)*amp);
-			rect(0,0,w.x,w.x);
+			strokeWeight(max((wMax*ringWThreshold2-w.x)*amp,0));
+			circle(0,0,w.x);
 			break;
 			case 1:
 			fillStyle.fillStyle();

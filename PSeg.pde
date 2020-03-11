@@ -7,7 +7,7 @@ class PSeg extends Entity {
 	IColor fillStyle = new IColor();
 	IColor strokeStyle = new IColor();
 	int type = 0;
-	int level = 0;
+	int level;
 	boolean alive = true;
 
 	Ring ring = new Ring();
@@ -24,6 +24,8 @@ class PSeg extends Entity {
 		if (parent != null) {
 			parent.children.add(this);
 			this.level = parent.level + 1;
+		} else {
+			this.level = 0;
 		}
 		this.children.clear();
 	}

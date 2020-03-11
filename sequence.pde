@@ -37,29 +37,38 @@ void addEvents() {
 }
 
 void instantEvents() {
-	for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(3);
-	if (beatInRange(1,8.75)) {
+	if (currBeat == 8.5) for (Plant plant : par) plant.die();
+	if (beatInRange(1,8.5)) {
+		for (Plant plant : par) plant.grow(3);
 		switch ((int)random(2)) {
 			case 0:
-			mobs.add(new Fern(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(6,9), random(0.1,0.3)));
+			mobs.add(new Fern(random(-de,de),-de,0, de*0.1, 0,random(-PI,PI),PI/2, random(15,18), random(0.1,0.4)));
 			break;
 			case 1:
-			mobs.add(new Rose(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(6,9), random(0.1,0.3)));
+			mobs.add(new Fern(random(-de,de),de,0, de*0.1, 0,random(-PI,PI),-PI/2, random(15,18), random(0.1,0.4)));
 			break;
 		}
-	} else if (beatInRange(8.75,25)) {
-		if (currBeatQ == 0.25) {
-			mobs.add(new Fern(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(12,15), random(0.1,0.3)));
-			mobs.add(new Daisy(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(12,15), random(0.1,0.3)));
-			for (int i = 0 ; i < min(3,par.size()) ; i ++) {
-				par.get(i).die();
+	} else if (beatInRange(8.5,25)) {
+		if (currBeatQ == 0.5) {
+			println(currBeat);
+			
+			mobs.add(new Tree(random(-de,de),de,0, de*0.2, 0,0,-PI/2, random(6,8), random(0.4,0.7),2));
+			for (Plant plant : par) plant.grow(1);
+		} else if (currBeatQ == 0) {
+			for (int i = 0 ; i < segs.arm ; i ++) {
+				println(i);
+				PSeg seg = segs.ar.get(i);
+				t = (float)frameCount/30;
+				aAmp = 0.004/(8-seg.level);
+				wAmp = 2/(8-seg.level);
+				seg.ang.pm.set(random(-aAmp,aAmp),random(-aAmp,aAmp),random(-aAmp,aAmp));
+				seg.w.pm.set(random(wAmp),0,0);
+				seg.setIndex(i%binCount);
 			}
-			for (PSeg seg : segs.ar) seg.effect(0, 0,2,0.1);
 		}
-	} else if (currBeat < 74) {
-
-	} else if (currBeat < 90) {
-
+	} else if (beatInRange(25,74)) {
+		//for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(6);
+		//mobs.add(new Daisy(random(-de,de),-de,0, de*0.1, 0,random(-PI,PI),PI/2, random(15,18), random(0.1,0.4)));
 	}
 }
 

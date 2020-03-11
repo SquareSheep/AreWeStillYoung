@@ -70,17 +70,17 @@ class Daisy extends Plant {
 }
 
 class Tree extends Plant {
-	float bf = 1.5; // Branching factor
+	float bf = 2; // Branching factor
 	float angR = 0.6; // Angle range
 
-	Tree(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float bf, float angR) {
+	Tree(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR, float bf) {
 		super(x,y,z, w, ax,ay,az);
 		this.maxLevel = (int)maxLevel; this.bf = bf; this.angR = angR;
 	}
 
-	Tree(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float bf) {
+	Tree(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR) {
 		super(x,y,z, w, ax,ay,az);
-		this.maxLevel = (int)maxLevel; this.bf = bf;
+		this.maxLevel = (int)maxLevel; this.angR = angR;
 	}
 
 	Tree(float x, float y, float z, float w, float ax, float ay, float az) {
@@ -96,7 +96,7 @@ class Tree extends Plant {
 			int prevTips = tips.size();
 			for (int i = 0 ; i < prevTips ; i ++) {
 				for (int o = 0 ; o < bf ; o ++) {
-					if (tips.get(i).level > 2) {
+					if (tips.get(i).level > 1) {
 						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR),random(-angR,angR),random(-angR,angR)));
 					} else {
 						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-0.05,0.05),random(-0.05,0.05),random(-0.05,0.05)));
@@ -163,7 +163,7 @@ class Curl extends Plant {
 abstract class Plant extends Mob {
 	ArrayList<PSeg> tips = new ArrayList<PSeg>();
 	ArrayList<PSeg> rips = new ArrayList<PSeg>();
-	int maxLevel = 4;
+	int maxLevel;
 	PSeg root;
 
 	boolean alive = true;
@@ -230,6 +230,7 @@ abstract class Plant extends Mob {
 		if (!alive && root.children.size() == 0) {
 			finished = true;
 			par.remove(this);
+			println("DEAD: " + this);
 		}
 	}
 
@@ -240,6 +241,7 @@ abstract class Plant extends Mob {
 
 	void render() {
 		setDraw();
+		rect(0,0,100,100);
 		root.render();
 		pop();
 	}
