@@ -38,7 +38,7 @@ float temp, x,y,z, x2,y2,z2, w,d, tick, r,g,b,a, r2,g2,b2,a2, i,j,k,o,t, amp,wAm
 
 void setup() {
   size(1100,1100,P3D);
-  de = (int)(width*0.5+height*0.5);
+  de = (int)((width*0.5+height*0.5)*1.2);
   front = new PVector(de*2,de,de*0.2);
   back = new PVector(-de*2,-de,-de*2);
 
@@ -65,7 +65,7 @@ void setup() {
 }
 
 void draw() {
-  //if (timer.beat) println(song.position() + "," + (int)(currBeat+1));
+  if (timer.beat) println(song.position() + "," + (int)(currBeat));
   background(0);
   cam.render();
   update();

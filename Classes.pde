@@ -236,6 +236,7 @@ abstract class Mob extends Entity {
   void update() {
     p.P.add(pv.p);
     ang.P.add(av.p);
+    rang.P.add(rav.p);
     p.update();
     pv.update();
     r.update();

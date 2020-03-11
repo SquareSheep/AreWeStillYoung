@@ -168,6 +168,8 @@ abstract class Plant extends Mob {
 
 	boolean alive = true;
 
+	Ring ring = new Ring();
+
 	Plant(float x, float y, float z, float w, float ax, float ay, float az) {
 		p = new Point(x,y,z);
 		ang = new Point(ax,ay,az);
@@ -227,10 +229,10 @@ abstract class Plant extends Mob {
 	void update() {
 		super.update();
 		if (root != null) root.update();
+		if (!ring.finished) ring.update();
 		if (!alive && root.children.size() == 0) {
 			finished = true;
 			par.remove(this);
-			println("DEAD: " + this);
 		}
 	}
 
@@ -241,8 +243,9 @@ abstract class Plant extends Mob {
 
 	void render() {
 		setDraw();
-		rect(0,0,100,100);
+		//rect(0,0,25,25);
 		root.render();
+		if (!ring.finished) ring.render();
 		pop();
 	}
 }
