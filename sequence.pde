@@ -37,22 +37,24 @@ void addEvents() {
 }
 
 void instantEvents() {
-	for (int i = 0 ; i < mobs.size() ; i ++) ((Plant)mobs.get(i)).grow(3);
+	for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(3);
 	if (beatInRange(1,8.75)) {
 		switch ((int)random(2)) {
 			case 0:
 			mobs.add(new Fern(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(6,9), random(0.1,0.3)));
 			break;
 			case 1:
-			mobs.add(new Flower(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(6,9), random(0.1,0.3)));
+			mobs.add(new Rose(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(6,9), random(0.1,0.3)));
 			break;
 		}
 	} else if (beatInRange(8.75,25)) {
 		if (currBeatQ == 0.25) {
 			mobs.add(new Fern(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(12,15), random(0.1,0.3)));
-			mobs.add(new Flower(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(12,15), random(0.1,0.3)));
-			for (int i = 0 ; i < min(3,mobs.size()) ; i ++) ((Plant)mobs.get(i)).die();
-			println(mobs.size());
+			mobs.add(new Daisy(0,0,0, de*0.1, random(-PI,PI),random(-PI,PI),random(-PI,PI), random(12,15), random(0.1,0.3)));
+			for (int i = 0 ; i < min(3,par.size()) ; i ++) {
+				par.get(i).die();
+			}
+			for (PSeg seg : segs.ar) seg.effect(0, 0,2,0.1);
 		}
 	} else if (currBeat < 74) {
 

@@ -18,6 +18,8 @@ IColor defaultFill = new IColor(125,125,125,255);
 IColor defaultStroke = new IColor(125,125,125,255);
 
 PSegPool segs = new PSegPool();
+ArrayList<Plant> par = new ArrayList<Plant>();
+
 void render() {
 	segs.update();
 	if (beatQ) instantEvents();

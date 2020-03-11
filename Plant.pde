@@ -1,20 +1,57 @@
-class Flower extends Plant {
+class Rose extends Plant {
 	float angR = 0.1; // Angle range
 	float angT = random(-0.1,0.1);
-	float nofPetals = (int)random(8,10);
+	int nofPetals = (int)random(8,10);
+	int nofRings = 3;
 
-	Flower(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR) {
+	Rose(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR) {
 		super(x,y,z, w, ax,ay,az);
 		this.maxLevel = (int)maxLevel;
 		this.angR = angR;
 	}
 
-	Flower(float x, float y, float z, float w, float ax, float ay, float az) {
+	Rose(float x, float y, float z, float w, float ax, float ay, float az) {
 		super(x,y,z, w, ax,ay,az);
 		maxLevel = (int)random(8,16);
 	}
 
-	Flower(float x, float y, float z, float w) {
+	Rose(float x, float y, float z, float w) {
+		this(x,y,z,w, 0,0,-PI/2);
+	}
+
+	void grow() {
+		if (alive && tips.get(0).level < maxLevel-1) {
+			tips.add(segs.add(tips.get(0), 0, w.p.x,0,0, random(-angR,angR),random(-angR,angR),angT+random(-angR,angR)));
+			tips.remove(0);
+		} else if (alive && tips.get(0).level == maxLevel-1 && tips.get(0).children.size() < nofPetals) {
+			float a = randomR(0.6,1.5);
+			for (float k = 0 ; k < nofRings ; k ++) {
+				for (float i = 0 ; i < nofPetals*(1+k*0.2) ; i ++) {
+					segs.add(tips.get(0), 2, w.p.x*k,w.p.x/4,0, k*0.1,a,i/nofPetals*2*PI);
+				}
+			}
+		}
+		
+	}
+}
+
+class Daisy extends Plant {
+	float angR = 0.1; // Angle range
+	float angT = random(-0.1,0.1);
+	float nofPetals = (int)random(8,10);
+
+	Daisy(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR) {
+		super(x,y,z, w, ax,ay,az);
+		this.maxLevel = (int)maxLevel;
+		this.angR = angR;
+	}
+
+	Daisy(float x, float y, float z, float w, float ax, float ay, float az) {
+		super(x,y,z, w, ax,ay,az);
+		maxLevel = (int)random(8,16);
+	}
+
+	Daisy(float x, float y, float z, float w) {
 		this(x,y,z,w, 0,0,-PI/2);
 	}
 
@@ -137,10 +174,15 @@ abstract class Plant extends Mob {
 		root = segs.add(null, 0, 0,0,0, 0,0,0);
 		tips.add(root);
 		this.w = new Point(w,0,0);
+		par.add(this);
 	}
 
 	Plant(float x, float y, float z) {
 		this(x,y,z, de*0.01, 0,0,-PI/2);
+	}
+
+	void effect(int type, float w, float wMax, float amp) {
+		for (PSeg tip : tips) tip.ring.reset(type, this.w.p.x*w, this.w.p.x*wMax, amp);
 	}
 
 	abstract void grow();
@@ -187,7 +229,7 @@ abstract class Plant extends Mob {
 		if (root != null) root.update();
 		if (!alive && root.children.size() == 0) {
 			finished = true;
-			println("DEAD" + this);
+			par.remove(this);
 		}
 	}
 

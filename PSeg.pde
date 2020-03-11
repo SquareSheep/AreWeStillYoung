@@ -10,6 +10,8 @@ class PSeg extends Entity {
 	int level = 0;
 	boolean alive = true;
 
+	Ring ring = new Ring();
+
 	PSeg() {}
 
 	void reset(PSeg parent, int type, float wx, float wy, float wz, float ax, float ay, float az) {
@@ -26,6 +28,10 @@ class PSeg extends Entity {
 		this.children.clear();
 	}
 
+	void effect(int type, float w, float wMax, float amp) {
+		ring.reset(type,w*this.w.p.x,wMax*this.w.p.x,amp);
+	}
+
 	void update() {
 		for (int i = 0 ; i < children.size() ; i ++) {
 			children.get(i).update();
@@ -34,7 +40,7 @@ class PSeg extends Entity {
 		ang.update();
 		fillStyle.update();
 		strokeStyle.update();
-
+		if (!ring.finished) ring.update();
 		if (!alive && w.p.x <= 0) finished = true;
 	}
 
@@ -42,7 +48,8 @@ class PSeg extends Entity {
 		push();
 		rotateX(ang.p.x);
 		rotateY(ang.p.y);
-		rotateZ(ang.p.z);		
+		rotateZ(ang.p.z);
+		ring.w.X ++;
 		switch(type) {
 			case 0: // Stem
 			strokeStyle.strokeStyle();
@@ -54,11 +61,16 @@ class PSeg extends Entity {
 			noStroke();
 			ellipse(w.p.x/2,0, w.p.x,w.p.y);
 			break;
+			case 2: // Petal
+			fillStyle.fillStyle();
+			triangle(w.p.x,0, 0,w.p.x, 0,-w.p.x);
+			break;
 		}
 		translate(w.p.x,0,0);
 		for (PSeg child : children) {
 			child.render();
 		}
+		if (!ring.finished) ring.render();	
 		pop();
 	}
 
