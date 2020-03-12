@@ -113,16 +113,16 @@ void instantEvents() {
 		segSetAngPM(5,8);
 		segSetFill(83,53,10, 0,0,0, 3,3,3, 3,-3,3);
 	} // Yell cry sounds
-	else if (beatInRange(24,74)) {
+	else if (beatInRange(24,73)) {
 		if (currBeat == 24) {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(-0.6,0,0);
 		}
-		if (currBeat == 33.5) {
+		if (currBeat == 32 || currBeat == 40 || currBeat == 48 || currBeat == 56 || currBeat == 64 || currBeat == 72) {
 			for (Plant plant : par) plant.die();
 		} else if (true) {
-			for (int o = 0 ; o < 0 ; o ++) {
-				Daisy mob = new Daisy(0,de*0.5,0, de*0.1, random(-PI/6,PI/6),random(-PI/6,PI/6),-PI/2, random(2,7), random(0.1,0.2));
+			for (int o = 0 ; o < 2 ; o ++) {
+				Daisy mob = new Daisy(0,de*0.5,0, de*0.1, random(-PI/6,PI/6),random(-PI/6,PI/6),-PI/2, random(2,6), random(0.1,0.2));
 				mob.r.reset(random(de*1.2),0,0);
 				mob.rang.reset(0,random(-PI,PI),0);
 				mob.rav.reset(0,(de*1.2-mob.r.p.x)/de*0.02+0.005,0);
@@ -133,6 +133,8 @@ void instantEvents() {
 		segSetWPM(2,8);
 		segSetAngPM(2,8);
 		segSetFill(255,25,25, 100,100,-100, 3,3,3, 0,0,0);
+	} else {
+		if (currBeat == 73) for (int i = 0 ; i < par.size() ; i ++) par.get(i).die();
 	}
 	segSetIndex();
 }
