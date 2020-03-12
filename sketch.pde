@@ -18,7 +18,9 @@ IColor defaultFill = new IColor(125,125,125,255);
 IColor defaultStroke = new IColor(125,125,125,255);
 
 PSegPool segs = new PSegPool();
+FloatPool far = new FloatPool();
 ArrayList<Plant> par = new ArrayList<Plant>();
+HashMap<String, TextHolder> textMap = new HashMap<String, TextHolder>();
 
 void render() {
 	segs.update();
@@ -31,4 +33,5 @@ void setSketch() {
 	strokeWeight(4);
 	strokeCap(ROUND);
 	strokeJoin(ROUND);
+	mobs.add(far);
 }
