@@ -99,7 +99,7 @@ class Tree extends Plant {
 					if (tips.get(i).level > 1) {
 						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR),random(-angR,angR),random(-angR,angR)));
 					} else {
-						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-0.05,0.05),random(-0.05,0.05),random(-0.05,0.05)));
+						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR*0.3,angR*0.3),random(-angR*0.3,angR*0.3),random(-angR*0.3,angR*0.3)));
 					}
 				}
 			}

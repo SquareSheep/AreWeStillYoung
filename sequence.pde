@@ -87,21 +87,23 @@ void instantEvents() {
 			for (float i = 0 ; i < 6 ; i ++) {
 				t = i/6*2*PI;
 				Tree mob = new Tree(0,0,0, de*0.2, 0,0,PI/2, random(5,7), random(0.4,0.7),2);
-				mob.r.reset(0,de*0.2,0);
+				mob.r.reset(0,de*0.1,0);
 				mob.rang.reset(0,0,t);
 				mob.rav.reset(0,0,0.01);
+				mob.av.reset(0,-0.01,0);
 				mobs.add(mob);
 			}
 		} else if (currBeat == 16.5) {
 			for (float i = 0 ; i < 6 ; i ++) {
 				t = i/6*2*PI+PI/3;
-				Tree mob = new Tree(0,0,0, de*0.3, 0,0,PI/2, random(5,7), random(0.4,0.7),2);
-				mob.r.reset(0,de*0.5,0);
+				Tree mob = new Tree(0,0,0, de*0.3, 0,1,PI/2, random(5,7), random(0.4,0.7),2);
+				mob.r.reset(0,de*0.2,0);
 				mob.rang.reset(0,0,t);
 				mob.rav.reset(0,0,0.01);
+				mob.av.reset(0,-0.01,0);
 				mobs.add(mob);
 			}
-			for (Plant plant : par) plant.av.reset(0.01,0.01,0);
+			for (Plant plant : par) plant.av.reset(0.03,0.01,0);
 		} else if (currBeat > 23) {
 			for (Plant plant : par) plant.kill(3);
 		}
@@ -116,9 +118,10 @@ void instantEvents() {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(-0.6,0,0);
 		}
-
-		if (true) {
-			for (int o = 0 ; o < 2 ; o ++) {
+		if (currBeat == 33.5) {
+			for (Plant plant : par) plant.die();
+		} else if (true) {
+			for (int o = 0 ; o < 0 ; o ++) {
 				Daisy mob = new Daisy(0,de*0.5,0, de*0.1, random(-PI/6,PI/6),random(-PI/6,PI/6),-PI/2, random(2,7), random(0.1,0.2));
 				mob.r.reset(random(de*1.2),0,0);
 				mob.rang.reset(0,random(-PI,PI),0);
@@ -126,7 +129,6 @@ void instantEvents() {
 				mobs.add(mob);
 			}
 		}
-		
 		for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow();
 		segSetWPM(2,8);
 		segSetAngPM(2,8);
