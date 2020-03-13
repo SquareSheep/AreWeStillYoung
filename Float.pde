@@ -60,6 +60,6 @@ class FloatPool extends ObjectPool<Float> {
 	}
 
 	Float add(float x, float y, float z) {
-		return add(x,y,z, 10, 0,0,0);
+		return add(x,y,z, 6.5, 0,0,0);
 	}
 }

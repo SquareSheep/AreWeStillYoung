@@ -106,54 +106,69 @@ void instantEvents() {
 		segSetFill(255,25,25, 100,100,-100, 3,3,3, 0,0,0);
 	} // Lyrics section
 	else if (beatInRange(73,136)) {
-		if (currBeat == 73) for (int i = 0 ; i < par.size() ; i ++) par.get(i).die();
+		if (currBeat == 73.5) {
+			for (int i = 0 ; i < par.size() ; i ++) par.get(i).die();
+			cam.ang.P.set(0,0,0);
+		}
 		if (currBeat == 73.5) textMap.get("when").draw(0,0,0);
-		if (currBeat == 74.5) textMap.get("I").draw(0,0,0);
-		if (currBeat == 75.5) textMap.get("was").draw(0,0,0);
-		if (currBeat == 76) textMap.get("younger").draw(0,0,0);
-		if (currBeat == 77.5) textMap.get("I").draw(0,0,0);
-		if (currBeat == 78.5) textMap.get("could").draw(0,0,0);
+		if (currBeat == 74.5) textMap.get("I").draw(-0.9,1,0);
+		if (currBeat == 75.5) textMap.get("was").draw(0.5,1,0);
+		if (currBeat == 76) textMap.get("younger").draw(0,2,0);
+		if (currBeat == 77.5) textMap.get("I").draw(-1.1,3,0);
+		if (currBeat == 78.5) textMap.get("could").draw(0.6,3,0);
 
 		if (currBeat == 80.5) textMap.get("fall").draw(0,0,0);
-		if (currBeat == 81.5) textMap.get("asleep").draw(0,0,0);
-		if (currBeat == 82.5) textMap.get("at").draw(0,0,0);
-		if (currBeat == 83.5) textMap.get("night").draw(0,0,0, 120,150);
+		if (currBeat == 81.5) textMap.get("asleep").draw(0,1,0);
+		if (currBeat == 82.5) textMap.get("at").draw(-1.2,2,0);
+		if (currBeat == 83.5) textMap.get("night").draw(0.7,2,0, 120,150);
 
-		if (currBeat == 89.5) textMap.get("dreaming").draw(0,0,0);
-		if (currBeat == 91.5) textMap.get("of").draw(0,0,0);
-		if (currBeat == 92.25) textMap.get("cotton").draw(0,0,0);
-		if (currBeat == 93.75) textMap.get("candy").draw(0,0,0);
-		if (currBeat == 95.25) textMap.get("clouds").draw(0,0,0);
+		if (currBeat == 89.5) textMap.get("dreaming").draw(-0.5,0,0);
+		if (currBeat == 91.5) textMap.get("of").draw(2.5,0,0);
+		if (currBeat == 92.25) textMap.get("cotton").draw(-1.55,1,0);
+		if (currBeat == 93.75) textMap.get("candy").draw(1.55,1,0);
+		if (currBeat == 95.25) textMap.get("clouds").draw(0,2,0, 20,40);
+
 		if (currBeat == 96.25) textMap.get("and").draw(0,0,0);
-		if (currBeat == 97.25) textMap.get("jars").draw(0,0,0);
-		if (currBeat == 98.25) textMap.get("of").draw(0,0,0);
-		if (currBeat == 99.75) textMap.get("fireflies").draw(0,0,0, 120,150);
+		if (currBeat == 97.25) textMap.get("jars").draw(-0.8,1,0);
+		if (currBeat == 98.25) textMap.get("of").draw(0.7,1,0);
+		if (currBeat == 99.75) textMap.get("fireflies").draw(0,2,0, 120,150);
 
-		if (currBeat == 105.5) textMap.get("now").draw(0,0,0);
-		if (currBeat == 107.25) textMap.get("I").draw(0,0,0);
-		if (currBeat == 107.75) textMap.get("lie").draw(0,0,0);
-		if (currBeat == 109) textMap.get("awake").draw(0,0,0, 60,90);
-		if (currBeat == 111.75) textMap.get("the").draw(0,0,0);
-		if (currBeat == 112.5) textMap.get("fantasy").draw(0,0,0, 60,90);
-		if (currBeat == 114.5) textMap.get("is").draw(0,0,0);
-		if (currBeat == 115.5) textMap.get("gone").draw(0,0,0, 40,60);
+		if (currBeat == 105.5) textMap.get("now").draw(-0.6,0,0);
+		if (currBeat == 107.25) textMap.get("I").draw(0.9,0,0);
+		if (currBeat == 107.75) textMap.get("lie").draw(-1.6,1,0);
+		if (currBeat == 109) textMap.get("awake").draw(0.8,1,0, 60,90);
 
-		if (currBeat == 117) textMap.get("are").draw(0,0,0);
-		if (currBeat == 117.5) textMap.get("we").draw(0,0,0);
-		if (currBeat == 118.5) textMap.get("still").draw(0,0,0);
-		if (currBeat == 119.5) textMap.get("young").draw(0,0,0);
-		if (currBeat == 121.5) textMap.get("are").draw(0,0,0);
-		if (currBeat == 122) textMap.get("we").draw(0,0,0);
-		if (currBeat == 123) textMap.get("still").draw(0,0,0);
-		if (currBeat == 124) textMap.get("young").draw(0,0,0);
-		if (currBeat == 126) textMap.get("are").draw(0,0,0);
-		if (currBeat == 126.5) textMap.get("we").draw(0,0,0);
-		if (currBeat == 127.5) textMap.get("still").draw(0,0,0, 90,200);
+		if (currBeat == 111.75) textMap.get("the").draw(-1.85,0,0);
+		if (currBeat == 112.5) textMap.get("fantasy").draw(1.1,0,0, 60,90);
+		if (currBeat == 114.5) textMap.get("is").draw(0,1,0);
+		if (currBeat == 115.5) textMap.get("gone").draw(0,2,0, 40,60);
 
-		if (currBeat == 133) textMap.get("are").draw(0,0,0);
-		if (currBeat == 133.5) textMap.get("we").draw(0,0,0);
-		if (currBeat == 134.5) textMap.get("still").draw(0,0,0);
-		if (currBeat == 135.5) textMap.get("young").draw(0,0,0);
+		//if (currBeat == 117) fontW = 600;
+		if (currBeat == 117) textMap.get("are").draw(-0.9,0,0);
+		if (currBeat == 117.5) textMap.get("we").draw(1.1,0,0);
+		if (currBeat == 118.5) textMap.get("still").draw(0,1,0);
+		if (currBeat == 119.5) textMap.get("young").draw(0,2,0);
+		if (currBeat == 121.5) textMap.get("are").draw(-0.9,0,0);
+		if (currBeat == 122) textMap.get("we").draw(1.1,0,0);
+		if (currBeat == 123) textMap.get("still").draw(0,1,0);
+		if (currBeat == 124) textMap.get("young").draw(0,2,0);
+		if (currBeat == 126) textMap.get("are").draw(-0.9,0,0);
+		if (currBeat == 126.5) textMap.get("we").draw(1.1,0,0);
+		if (currBeat == 127.5) textMap.get("still").draw(0,1,0, 90,200);
+
+		if (currBeat == 133) textMap.get("are").draw(-0.9,0,0);
+		if (currBeat == 133.5) textMap.get("we").draw(1.1,0,0);
+		if (currBeat == 134.5) textMap.get("still").draw(0,1,0);
+		if (currBeat == 135.5) textMap.get("young").draw(0,2,0);
+
+		for (int i = 0 ; i < far.arm ; i ++) {
+			t = (float)i/far.arm;
+			Float mob = far.get(i);
+			mob.setIndex(i%binCount);
+			mob.p.pm.set(0,-0.25,0.25);
+			mob.strokeStyle.setC(t*255, (1-t)*255,t*255,255);
+			mob.strokeStyle.setM(3,3,3,0);
+		}
 	} else if (beatInRange(136,171)) {
 
 	}
