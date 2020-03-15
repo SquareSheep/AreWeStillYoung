@@ -40,16 +40,21 @@ void instantEvents() {
 	// Intro, children's voices
 	if (beatInRange(1,8.5)) {
 		for (Plant plant : par) plant.grow();
-		switch ((int)random(2)) {
-			case 0:
-			mobs.add(new Fern(random(-de,de),-de,0, de*0.15, 0,random(-PI,PI),PI/2, random(15,18), random(0.1,0.4)));
-			break;
-			case 1:
-			mobs.add(new Fern(random(-de,de),de,0, de*0.15, 0,random(-PI,PI),-PI/2, random(15,18), random(0.1,0.4)));
-			break;
+		for (int o = 0 ; o < 2 ; o ++) {
+			switch ((int)random(3)) {
+				case 0:
+				mobs.add(new Fern(random(-de,de),-de,0, de*0.15, 0,random(-PI,PI),PI/2, random(12,15), random(0.1,0.4)));
+				break;
+				case 1:
+				mobs.add(new Fern(random(-de,de),de,0, de*0.15, 0,random(-PI,PI),-PI/2, random(12,15), random(0.1,0.9)));
+				break;
+				case 2:
+				mobs.add(new Daisy(random(-de,de),de,0, de*0.15, 0,random(-PI,PI),-PI/2, random(4,6), random(0.1,0.4)));
+				break;
+			}
 		}
-		segSetWPM(5,8);
-		segSetAngPM(5,8);
+		segSetWPM(2,8);
+		segSetAngPM(0.03,8);
 		segSetFill(125,125,125, 55,55,-100, 3,3,3, 0,0,0);
 	} // Chimes
 	else if (beatInRange(8.5,24)) {
@@ -80,30 +85,34 @@ void instantEvents() {
 		}
 		
 		if (currBeatQ == 0.5) for (Plant plant : par) plant.grow();
-		segSetWPM(5,8);
-		segSetAngPM(5,8);
-		segSetFill(83,53,10, 0,0,0, 3,3,3, 3,-3,3);
+		segSetWPM(2,8);
+		segSetAngPM(0.03,8);
+		r = noise(frameCount*0.03);
+		g = noise(frameCount*0.04);
+		b = noise(frameCount*0.06);
+		segSetFill(166*r,106*g,22*b, 0,0,0, 3*r,3*g,3*b, 3,-3,3);
 	} // Yell cry sounds
 	else if (beatInRange(24,73)) {
 		if (currBeat == 24) {
 			for (Plant plant : par) plant.die();
-			cam.ang.P.set(-0.6,0,0);
+			cam.ang.P.set(0,0,0);
 		}
 		if (currBeat == 32 || currBeat == 40 || currBeat == 48 || currBeat == 56 || currBeat == 64 || currBeat == 72) {
 			for (Plant plant : par) plant.die();
-		} else if (true) {
-			for (int o = 0 ; o < 2 ; o ++) {
-				Daisy mob = new Daisy(0,de*0.5,0, de*0.1, random(-PI/6,PI/6),random(-PI/6,PI/6),-PI/2, random(2,6), random(0.1,0.2));
-				mob.r.reset(random(de*1.2),0,0);
-				mob.rang.reset(0,random(-PI,PI),0);
-				mob.rav.reset(0,(de*1.2-mob.r.p.x)/de*0.02+0.005,0);
-				mobs.add(mob);
+			for (int i = 0 ; i < 100 ; i ++) {
+				far.add(random(-de,de),random(-de,de),random(de*0.5,de), random(de*0.5), 0,0,0);
 			}
+		} else if (currBeat < 72) {
+			yellCryRing(random(6,18), randomR(0.005,0.02), 3);
 		}
-		for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow();
-		segSetWPM(2,8);
-		segSetAngPM(2,8);
-		segSetFill(255,25,25, 100,100,-100, 3,3,3, 0,0,0);
+		for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(3);
+		segSetWPM(0.5,8);
+		segSetAngPM(0.01,8);
+		r = noise(frameCount*0.03);
+		g = noise(frameCount*0.04);
+		b = noise(frameCount*0.06);
+		segSetFill(75*r,125*g,75*b, -55*g,55*b,-55*r, 2,2,2, 0,0,0);
+		floatSetFill(125*r,125*g,255*b, -100*g,125*b,-100*r, 2,2,2, 0,0,0);
 	} // Lyrics section
 	else if (beatInRange(73,136)) {
 		if (currBeat == 73.5) {
@@ -122,11 +131,11 @@ void instantEvents() {
 		if (currBeat == 82.5) textMap.get("at").draw(-1.2,2,0);
 		if (currBeat == 83.5) textMap.get("night").draw(0.7,2,0, 120,150);
 
-		if (currBeat == 89.5) textMap.get("dreaming").draw(-0.5,0,0);
-		if (currBeat == 91.5) textMap.get("of").draw(2.5,0,0);
-		if (currBeat == 92.25) textMap.get("cotton").draw(-1.55,1,0);
-		if (currBeat == 93.75) textMap.get("candy").draw(1.55,1,0);
-		if (currBeat == 95.25) textMap.get("clouds").draw(0,2,0, 20,40);
+		if (currBeat == 89.5) textMap.get("dreaming").draw(0,0,0);
+		if (currBeat == 91.5) textMap.get("of").draw(0,1,0);
+		if (currBeat == 92.25) textMap.get("cotton").draw(-1.5,2,0);
+		if (currBeat == 93.75) textMap.get("candy").draw(1.5,2,0);
+		if (currBeat == 95.25) textMap.get("clouds").draw(0,3,0, 20,40);
 
 		if (currBeat == 96.25) textMap.get("and").draw(0,0,0);
 		if (currBeat == 97.25) textMap.get("jars").draw(-0.8,1,0);
@@ -143,7 +152,6 @@ void instantEvents() {
 		if (currBeat == 114.5) textMap.get("is").draw(0,1,0);
 		if (currBeat == 115.5) textMap.get("gone").draw(0,2,0, 40,60);
 
-		//if (currBeat == 117) fontW = 600;
 		if (currBeat == 117) textMap.get("are").draw(-0.9,0,0);
 		if (currBeat == 117.5) textMap.get("we").draw(1.1,0,0);
 		if (currBeat == 118.5) textMap.get("still").draw(0,1,0);
@@ -165,10 +173,12 @@ void instantEvents() {
 			t = (float)i/far.arm;
 			Float mob = far.get(i);
 			mob.setIndex(i%binCount);
-			mob.p.pm.set(0,-0.25,0.25);
-			mob.strokeStyle.setC(t*255, (1-t)*255,t*255,255);
-			mob.strokeStyle.setM(3,3,3,0);
+			mob.p.P.z += sin((float)i/100+(float)frameCount/100)*15;
 		}
+		r = noise(frameCount*0.03);
+		g = noise(frameCount*0.04);
+		b = noise(frameCount*0.06);
+		floatSetFill(175*r,175*g,255*b, -55*g,125*b,-55*r, 2,2,2, 0,0,0);
 	} else if (beatInRange(136,171)) {
 
 	}
@@ -208,7 +218,7 @@ void segSetWPM(float amp, int maxLevel) {
 void segSetAngPM(float amp, int maxLevel) {
 	for (int i = 0 ; i < segs.arm ; i ++) {
 		PSeg seg = segs.ar.get(i);
-		seg.w.pm.set(amp/(maxLevel-seg.level),0,0);
+		seg.ang.pm.set(amp/(maxLevel-seg.level),0,0);
 	}
 }
 
@@ -222,7 +232,18 @@ void segSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr,
 		PSeg mob = segs.ar.get(i);
 		temp = (float)frameCount/30;
 		t = (float)i/segs.arm;
-		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,75, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
+		mob.strokeStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+	}
+}
+
+void floatSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr, 
+	float rm, float gm, float bm, float rmr, float gmr, float bmr) {
+	for (int i = 0 ; i < far.arm ; i ++) {
+		Float mob = far.ar.get(i);
+		temp = (float)frameCount/30;
+		t = (float)i/far.arm;
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,75, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
 		mob.strokeStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
 	}
 }

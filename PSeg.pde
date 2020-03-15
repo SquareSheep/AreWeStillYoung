@@ -52,19 +52,16 @@ class PSeg extends Entity {
 		rotateY(ang.p.y);
 		rotateZ(ang.p.z);
 		ring.w.X ++;
+		strokeStyle.strokeStyle();
+		fillStyle.fillStyle();
 		switch(type) {
 			case 0: // Stem
-			strokeStyle.strokeStyle();
-			noFill();
 			line(0,0,0, w.p.x,0,0);
 			break;
 			case 1: // Leaf
-			fillStyle.fillStyle();
-			noStroke();
 			ellipse(w.p.x/2,0, w.p.x,w.p.y);
 			break;
 			case 2: // Petal
-			fillStyle.fillStyle();
 			triangle(w.p.x,0, 0,w.p.x, 0,-w.p.x);
 			break;
 		}

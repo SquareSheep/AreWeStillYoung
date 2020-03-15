@@ -1,3 +1,16 @@
+void yellCryRing(float length, float rav, float num) {
+	float angOffset = random(PI);
+	for (float o = 0 ; o < num ; o ++) {
+		t = o/num+angOffset;
+		Fern mob = new Fern(0,0,0, de*0.15, PI/2+random(-PI/4,PI/4),0,0, length, random(0.1,0.6));
+		mob.r.reset(random(de*0.5),0,0);
+		mob.rang.reset(0,0,t*2*PI);
+		mob.rav.reset(0,0,rav);
+		mobs.add(mob);
+	}
+	for (int i = 0 ; i < num/2 ; i ++) par.get(i).die();
+}
+
 class PointReset extends Event {
 	Point p;
 	float x,y,z,X,Y,Z;

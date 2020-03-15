@@ -22,7 +22,7 @@ class Float extends MobF {
 		this.finished = false;
 		this.alive = true;
 		this.lifeSpan = (int)random(20,40);
-		this.strokeStyle.reset(random(255),random(255),random(255),255);
+		this.strokeStyle.reset(125,125,125,255);
 		this.fillStyle.reset(0,0,0,0);
 	}
 
@@ -41,8 +41,7 @@ class Float extends MobF {
 
 	void render() {
 		setDraw();
-		strokeWeight(w.p.x);
-		point(0,0);
+		circle(0,0,w.p.x);
 		pop();
 	}
 }
@@ -60,6 +59,6 @@ class FloatPool extends ObjectPool<Float> {
 	}
 
 	Float add(float x, float y, float z) {
-		return add(x,y,z, 6.5, 0,0,0);
+		return add(x,y,z, 16, 0,0,0);
 	}
 }

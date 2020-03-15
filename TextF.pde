@@ -1,5 +1,5 @@
 static String fontName = "../Fonts/FreeSans.ttf";
-int fontW = 450;
+int fontW = 500;
 class TextHolder {
 	RShape grp;
 	RPoint[] ar;

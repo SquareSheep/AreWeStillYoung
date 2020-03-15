@@ -54,7 +54,7 @@ void setup() {
   textMap.put("was", new TextHolder("was"));
   textMap.put("younger", new TextHolder("younger"));
   textMap.put("could", new TextHolder("could"));
-  textMap.put("fall", new TextHolder("fall"));
+  textMap.put("fall", new TextHolder("Fall"));
   textMap.put("asleep", new TextHolder("asleep"));
   textMap.put("at", new TextHolder("at"));
   textMap.put("night", new TextHolder("night"));
