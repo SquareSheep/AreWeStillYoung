@@ -1,7 +1,3 @@
-/*
-Useful general-purpose functions
-*/
-
 boolean beatInRange(float minBeat, float maxBeat) {
 	return currBeat >= minBeat && currBeat < maxBeat;
 }

@@ -47,7 +47,6 @@ class Daisy extends Plant {
 		super(x,y,z, w, ax,ay,az);
 		this.maxLevel = (int)maxLevel;
 		this.angR = angR;
-		println(maxLevel);
 	}
 
 	Daisy(float x, float y, float z, float w, float ax, float ay, float az) {

@@ -11,6 +11,50 @@ void yellCryRing(float length, float rav, float num) {
 	for (int i = 0 ; i < num/2 ; i ++) par.get(i).die();
 }
 
+void segSetWPM(float amp, int maxLevel) {
+	for (int i = 0 ; i < segs.arm ; i ++) {
+		PSeg seg = segs.ar.get(i);
+		seg.w.pm.set(amp/(maxLevel-seg.level),0,0);
+	}
+}
+
+void segSetAngPM(float amp, int maxLevel) {
+	for (int i = 0 ; i < segs.arm ; i ++) {
+		PSeg seg = segs.ar.get(i);
+		seg.ang.pm.set(amp/(maxLevel-seg.level),0,0);
+	}
+}
+
+void segSetIndex() {
+	for (int i = 0 ; i < segs.arm ; i ++) segs.ar.get(i).setIndex(i%binCount);
+}
+
+void plantSetIndex() {
+	for (int i = 0 ; i < par.size() ; i ++) par.get(i).setIndex((float)i/par.size()*binCount);
+}
+
+void segSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr, 
+	float rm, float gm, float bm, float rmr, float gmr, float bmr) {
+	for (int i = 0 ; i < segs.arm ; i ++) {
+		PSeg mob = segs.ar.get(i);
+		temp = (float)frameCount/30;
+		t = (float)i/segs.arm;
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,75, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
+		mob.strokeStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+	}
+}
+
+void floatSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr, 
+	float rm, float gm, float bm, float rmr, float gmr, float bmr) {
+	for (int i = 0 ; i < far.arm ; i ++) {
+		Float mob = far.ar.get(i);
+		temp = (float)frameCount/30;
+		t = (float)i/far.arm;
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,75, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
+		mob.strokeStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+	}
+}
+
 class PointReset extends Event {
 	Point p;
 	float x,y,z,X,Y,Z;
