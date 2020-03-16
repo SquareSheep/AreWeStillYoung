@@ -21,17 +21,20 @@ PSegPool segs = new PSegPool();
 FloatPool far = new FloatPool();
 ArrayList<Plant> par = new ArrayList<Plant>();
 HashMap<String, TextHolder> textMap = new HashMap<String, TextHolder>();
+SpringValue strokeW = new SpringValue(3);
 
 void render() {
+	strokeCap(ROUND);
+	strokeJoin(ROUND);
 	segs.update();
 	if (beatQ) instantEvents();
+	strokeW.v += avg*0.005;
+	strokeW.update();
+	strokeWeight(strokeW.x);
 }
 
 void setSketch() {
 	front = new PVector(de*2,de,de*0.2);
 	back = new PVector(-de*2,-de,-de*2);
-	strokeWeight(4);
-	strokeCap(ROUND);
-	strokeJoin(ROUND);
 	mobs.add(far);
 }

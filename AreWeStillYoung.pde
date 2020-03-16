@@ -24,6 +24,7 @@ BeatTimer timer;
 float currTime;
 float currBeat;
 float currBeatQ;
+float currBeatF;
 static float fpb;
 static int fphb, fpqb;
 int currFrame;
@@ -150,6 +151,7 @@ void update() {
   if (timer.beat) {
     currFrame = 0;
     currBeat += 0.25;
+    currBeatF = currBeat - currBeat%1;
   }
   currFrame ++;
   if (currFrame == fpqb || currFrame == fphb || currFrame == fpqb*3) {

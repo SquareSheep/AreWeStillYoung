@@ -188,54 +188,73 @@ void instantEvents() {
 		b = noise(frameCount*0.06);
 		floatSetFill(175*r,175*g,255*b, -55*g,125*b,-55*r, 2,2,2, 0,0,0);
 	} // Yell cry sounds 2
-	else if (beatInRange(136,171)) {
-		// Rings of flowers flying towards the camera
-		// Plants die once off-screen
-		// Plants grow/shrink based on avg
-		// 144 150 152 160 165-167
+	else if (beatInRange(136,169)) {
 		if (currBeat == 136) {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(0,0,0);
-		}
-		if (false) {//currBeat == 144 || currBeat == 150 || currBeat == 152 || currBeat == 160 || currBeat == 166) {
+		} // 144, 150, 159, 166
+		if (currBeatF == 144 || currBeatF == 160) {
 			for (Plant plant : par) plant.die();
-			for (int i = 0 ; i < 100 ; i ++) {
-				far.add(random(-de,de),random(-de,de),random(de*0.5,de), random(de*0.5), 0,0,0);
-			}
-		} else if (currBeat < 171) {
-			int num = (int)random(3,6);
-			float length = random(3,6);
-			float angOffset = random(PI);
-			float dist = random(0.8,1)*de;
-			float ravAmp = random(-0.001,0.001);
-			int rangIndex = (int)random(binCount);
-			for (float i = 0 ; i < num ; i ++) {
-				t = i/num + angOffset;
-				Daisy mob = new Daisy(0,0,-de*0.5, de*0.1, 0,0,PI, length, random(0.1,0.5));
-				mob.r.reset(dist,0,0);
-				mob.rang.reset(0,0,t*2*PI);
-				mob.pv.reset(0,0,1);
-				mob.pv.pm.set(0,0,1);
-				mob.rav.pm.set(0,0,ravAmp);
-				mob.rav.index = rangIndex;
-				mobs.add(mob);
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else {
+			if (beatInRange(151.25,152.25)) {
+				for (Plant plant : par) plant.kill(2);
+				for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+			} else if (beatInRange(166.5,169)) {
+				if (par.size() > 0) for (int o = 0 ; o < 3 ; o ++) par.get((int)random(par.size())).die();
+			} else {
+				for (float i = 0 ; i < 10 ; i ++) {
+					float ang = random(-PI,PI);
+					float dist = random(de*0.7,de*1.2);
+					far.add(cos(ang)*dist,sin(ang)*dist,random(-de,de), random(de*0.05,de*0.1)).pv.reset(0,0,25);
+				}
+
+				int num = (int)random(4,6);
+				float length = random(4,6);
+				float angOffset = random(PI);
+				float dist = random(0.7,0.9)*de;
+				float ravAmp = random(-0.0001,0.0001);
+				int rangIndex = (int)random(binCount);
+				for (float i = 0 ; i < num ; i ++) {
+					t = i/num + angOffset;
+					Plant mob;
+					switch((int)random(2)) {
+						case 0:
+						mob = new Daisy(0,0,-de*0.75, de*0.13, 0,0,PI, length, random(0.1,0.5));
+						break;
+						default:
+						mob = new Fern(0,0,-de*0.75, de*0.13, 0,0,PI, length*2, random(0.5,0.9));
+					}
+					mob.p.mass = 3;
+					mob.p.vMult = 0;
+					mob.pv.mass = 3;
+					mob.pv.vMult = 0;
+					mob.r.reset(dist,0,0);
+					mob.rang.reset(0,0,t*2*PI);
+					mob.pv.reset(0,0,10);
+					mob.pv.pm.set(0,0,0.5);
+					mob.rav.pm.set(0,0,ravAmp);
+					mob.rav.index = rangIndex;
+					mobs.add(mob);
+				}
+				for (Plant plant : par) plant.grow(3);
 			}
 		}
-		for (int i = 0 ; i < par.size() ; i ++) {
-			Plant mob = par.get(i);
-			mob.grow(3);
-			if (mob.p.p.z > de*1.5) mob.die();
-		}
-		segSetWPM(0.5,8);
-		segSetAngPM(0.01,8);
-		r = noise(frameCount*0.03);
-		g = noise(frameCount*0.04);
-		b = noise(frameCount*0.06);
-		segSetFill(75*r,125*g,75*b, -55*g,55*b,-55*r, 2,2,2, 0,0,0);
-		floatSetFill(125*r,125*g,255*b, -100*g,125*b,-100*r, 2,2,2, 0,0,0);
+
+		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*1.1) par.get(i).die();
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		r = noise(frameCount*0.07);
+		g = noise(frameCount*0.1);
+		b = noise(frameCount*0.13);
+		float r2 = noise(frameCount*0.12);
+		float g2 = noise(frameCount*0.05);
+		float b2 = noise(frameCount*0.09);
+		segSetFill(110*r,150*g,50*b, -55*r2,-55*g2,-55*b2, r*1.5,g*1.5,b*1.5, 0,0,0);
+		floatSetFill(125*r,175*g,255*b, 125*r2,125*g2,125*b2, r*1.5,g*1.5,b*2.5, 0,0,0);
 	} // Scream trees 1
-	else if (beatInRange(171,300)) {
-		if (currBeat == 171) {
+	else if (beatInRange(169,300)) {
+		if (currBeat == 169) {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(0,0,0);
 		}
@@ -259,7 +278,7 @@ void keyboardInput() {
 		setTime(48065,88);
 		break;
 		case '5':
-		setTime(73166,134);
+		setTime(73723,135);
 		break;
 		case '6':
 		setTime(0,0);

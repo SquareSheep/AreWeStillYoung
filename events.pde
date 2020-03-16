@@ -35,23 +35,25 @@ void plantSetIndex() {
 
 void segSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr, 
 	float rm, float gm, float bm, float rmr, float gmr, float bmr) {
+	float amp = 0.5;
 	for (int i = 0 ; i < segs.arm ; i ++) {
 		PSeg mob = segs.ar.get(i);
 		temp = (float)frameCount/30;
 		t = (float)i/segs.arm;
-		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,75, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
-		mob.strokeStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+		mob.strokeStyle.set((rc+rcr*t)*amp,(gc+gcr*t)*amp,(bc+bcr*t)*amp,125, rm+rmr*t,gm+gmr*t,bm+bmr*t,2);
 	}
 }
 
 void floatSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr, 
 	float rm, float gm, float bm, float rmr, float gmr, float bmr) {
+	float amp = 0.5;
 	for (int i = 0 ; i < far.arm ; i ++) {
 		Float mob = far.ar.get(i);
 		temp = (float)frameCount/30;
 		t = (float)i/far.arm;
-		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,75, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
-		mob.strokeStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
+		mob.strokeStyle.set((rc+rcr*t)*amp,(gc+gcr*t)*amp,(bc+bcr*t)*amp,125, rm+rmr*t,gm+gmr*t,bm+bmr*t,2);
 	}
 }
 
