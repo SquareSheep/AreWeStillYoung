@@ -32,10 +32,6 @@ Drop: 297
 
 */
 
-void addEvents() {
-
-}
-
 void instantEvents() {
 	// Children's voices
 	if (beatInRange(1,8.5)) {
@@ -55,7 +51,7 @@ void instantEvents() {
 		}
 		segSetWPM(2,8);
 		segSetAngPM(0.03,8);
-		segSetFill(125,125,125, 55,55,-100, 3,3,3, 0,0,0);
+		segSetFill(175,175,175, 125,-125,125);
 	} // Bass chimes
 	else if (beatInRange(8.5,24)) {
 		if (currBeat == 8.5) {
@@ -87,20 +83,20 @@ void instantEvents() {
 		if (currBeatQ == 0.5) for (Plant plant : par) plant.grow();
 		segSetWPM(2,8);
 		segSetAngPM(0.03,8);
-		r = noise(frameCount*0.03);
-		g = noise(frameCount*0.04);
-		b = noise(frameCount*0.06);
-		segSetFill(166*r,106*g,22*b, 0,0,0, 3*r,3*g,3*b, 3,-3,3);
-	} // Yell cry sounds 1
+		segSetFill(166,106,22, 75,55,15);
+	} // Yell cry ring 1
 	else if (beatInRange(24,73)) {
 		if (currBeat == 24) {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(0,0,0);
 		}
 		if (currBeat == 32 || currBeat == 40 || currBeat == 48 || currBeat == 56 || currBeat == 64 || currBeat == 72) {
-			for (Plant plant : par) plant.die();
+			for (Plant plant : par) {
+				plant.die();
+				plant.rv.reset(0,0,random(20,30));
+			}
 			for (int i = 0 ; i < 100 ; i ++) {
-				far.add(random(-de,de),random(-de,de),random(de*0.5,de), random(de*0.5), 0,0,0);
+				far.add(random(-de,de),random(-de,de),random(-de,de), random(de*0.02,de*0.1), 0,0,0).pv.reset(random(-10,10),random(-10,10),random(-10,10));
 			}
 		} else if (currBeat < 72) {
 			yellCryRing(random(6,18), randomR(0.005,0.02), 3);
@@ -108,12 +104,9 @@ void instantEvents() {
 		for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(3);
 		segSetWPM(0.5,8);
 		segSetAngPM(0.01,8);
-		r = noise(frameCount*0.03);
-		g = noise(frameCount*0.04);
-		b = noise(frameCount*0.06);
-		segSetFill(75*r,125*g,75*b, -55*g,55*b,-55*r, 2,2,2, 0,0,0);
-		floatSetFill(125*r,125*g,255*b, -100*g,125*b,-100*r, 2,2,2, 0,0,0);
-	} // Lyrics section 1
+		segSetFill(100,175,100, -100,155,-100);
+		floatSetFill(125,125,255, -100,125,-100);
+	} // Lyrics 1
 	else if (beatInRange(73,136)) {
 		if (currBeat == 73.5) {
 			for (int i = 0 ; i < par.size() ; i ++) par.get(i).die();
@@ -183,84 +176,131 @@ void instantEvents() {
 			mob.setIndex(i%binCount);
 			mob.p.P.z += sin((float)i/100+(float)frameCount/100)*15;
 		}
-		r = noise(frameCount*0.03);
-		g = noise(frameCount*0.04);
-		b = noise(frameCount*0.06);
-		floatSetFill(175*r,175*g,255*b, -55*g,125*b,-55*r, 2,2,2, 0,0,0);
-	} // Yell cry sounds 2
+		segSetFill(175,125,175, -166,100,-166);
+		floatSetFill(125,125,255, -100,125,-100);
+	} // Yell cry sounds 1
 	else if (beatInRange(136,169)) {
 		if (currBeat == 136) {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(0,0,0);
-		} // 144, 150, 159, 166
-		if (currBeatF == 144 || currBeatF == 160) {
+		} else if (currBeatF == 144 || currBeatF == 160) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else if (beatInRange(151.25,152.25)) {
+			for (Plant plant : par) plant.kill(2);
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else if (beatInRange(166.5,169)) {
+			if (par.size() > 0) for (int o = 0 ; o < 3 ; o ++) par.get((int)random(par.size())).die();
 		} else {
-			if (beatInRange(151.25,152.25)) {
-				for (Plant plant : par) plant.kill(2);
-				for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
-			} else if (beatInRange(166.5,169)) {
-				if (par.size() > 0) for (int o = 0 ; o < 3 ; o ++) par.get((int)random(par.size())).die();
-			} else {
-				for (float i = 0 ; i < 10 ; i ++) {
-					float ang = random(-PI,PI);
-					float dist = random(de*0.7,de*1.2);
-					far.add(cos(ang)*dist,sin(ang)*dist,random(-de,de), random(de*0.05,de*0.1)).pv.reset(0,0,25);
-				}
-
-				int num = (int)random(4,6);
-				float length = random(4,6);
-				float angOffset = random(PI);
-				float dist = random(0.7,0.9)*de;
-				float ravAmp = random(-0.0001,0.0001);
-				int rangIndex = (int)random(binCount);
-				for (float i = 0 ; i < num ; i ++) {
-					t = i/num + angOffset;
-					Plant mob;
-					switch((int)random(2)) {
-						case 0:
-						mob = new Daisy(0,0,-de*0.75, de*0.13, 0,0,PI, length, random(0.1,0.5));
-						break;
-						default:
-						mob = new Fern(0,0,-de*0.75, de*0.13, 0,0,PI, length*2, random(0.5,0.9));
-					}
-					mob.p.mass = 3;
-					mob.p.vMult = 0;
-					mob.pv.mass = 3;
-					mob.pv.vMult = 0;
-					mob.r.reset(dist,0,0);
-					mob.rang.reset(0,0,t*2*PI);
-					mob.pv.reset(0,0,10);
-					mob.pv.pm.set(0,0,0.5);
-					mob.rav.pm.set(0,0,ravAmp);
-					mob.rav.index = rangIndex;
-					mobs.add(mob);
-				}
-				for (Plant plant : par) plant.grow(3);
-			}
+			yellCryMain();
 		}
 
 		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*1.1) par.get(i).die();
 		segSetWPM(0.25,8);
 		segSetAngPM(0.005,8);
-		r = noise(frameCount*0.07);
-		g = noise(frameCount*0.1);
-		b = noise(frameCount*0.13);
-		float r2 = noise(frameCount*0.12);
-		float g2 = noise(frameCount*0.05);
-		float b2 = noise(frameCount*0.09);
-		segSetFill(110*r,150*g,50*b, -55*r2,-55*g2,-55*b2, r*1.5,g*1.5,b*1.5, 0,0,0);
-		floatSetFill(125*r,175*g,255*b, 125*r2,125*g2,125*b2, r*1.5,g*1.5,b*2.5, 0,0,0);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
 	} // Scream trees 1
-	else if (beatInRange(169,300)) {
+	else if (beatInRange(169,176)) {
 		if (currBeat == 169) {
+			for (Plant plant : par) plant.die();
+			cam.ang.P.set(-0.3,0,0);
+		} else {
+			screamTrees();
+		}
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(166,106,22, 75,55,15);
+		floatSetFill(125,75,75, -55,-55,55);
+	} // Yell cry sounds 2
+	else if (beatInRange(176,184)) {
+		if (currBeat == 176) {
+			for (Plant plant : par) plant.die();
+			cam.ang.P.set(0,0,0);
+		} else if (beatInRange(182.5,184)) {
+			for (Plant plant : par) plant.kill(2);
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else {
+			yellCryMain();
+		}
+
+		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*1.1) par.get(i).die();
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
+	} //"Bwuhh" stab
+	else if (beatInRange(184,186)) {
+		if (currBeat == 184) {
+			for (Plant plant : par) plant.die();
+		} else {
+			float angOffset = random(PI);
+			for (float o = 0 ; o < 5 ; o ++) {
+				t = o/5;
+				Plant mob = new Fern(0,0,0, de*0.2, 0,0,t*2*PI+angOffset, random(12,15), randomR(0.1,0.2));
+				mob.rav.reset(0,0,randomR(0.01,0.03));
+				mobs.add(mob);
+			}
+			for (float o = 0 ; o < 5 ; o ++) {
+				t = o/5;
+				Plant mob = new Curl(0,0,0, de*0.1, 0,0,t*2*PI+angOffset, random(12,15), randomR(0.5,0.8));
+				mob.rav.reset(0,0,randomR(0.01,0.03));
+				mobs.add(mob);
+			}
+			for (Plant plant : par) plant.grow(5);
+			segSetWPM(0.05,8);
+			segSetAngPM(0.005,8);
+			segSetFill(125,222,75, 75,-125,75);
+			floatSetFill(125,175,255, 125,125,125);
+		}
+	} // Scream trees 3
+	else if (beatInRange(186,192)) {
+		if (currBeat == 186) {
+			for (Plant plant : par) plant.die();
+			cam.ang.P.set(-0.3,0,0);
+		} else {
+			screamTrees();
+		}
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(166,106,22, 75,55,15);
+		floatSetFill(75,100,125, 55,55,55);
+	} // Yell cry sounds 4
+	else if (beatInRange(192,200)) {
+		if (currBeat == 192) {
+			for (Plant plant : par) plant.die();
+			cam.ang.P.set(0,0,0);
+		} else if (currBeat > 198) {
+			for (Plant plant : par) plant.kill(1);
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else {
+			yellCryMain();
+		}
+
+		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*1.1) par.get(i).die();
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
+	} // Quiet bridge
+	else if (beatInRange(200,215)) {
+		if (currBeat == 200) {
 			for (Plant plant : par) plant.die();
 			cam.ang.P.set(0,0,0);
 		}
+	} // Distortion bridge
+	else if (beatInRange(215,234)) {
+	} // Lyrics 2
+	else if (beatInRange(234,297)) {
+
 	}
+
 	segSetIndex();
 	plantSetIndex();
+}
+
+void addEvents() {
+
 }
 
 void keyboardInput() {
@@ -281,7 +321,10 @@ void keyboardInput() {
 		setTime(73723,135);
 		break;
 		case '6':
-		setTime(0,0);
+		setTime(91184,167);
+		break;
+		case '7':
+		setTime(100426,184);
 		break;
 	}
 }

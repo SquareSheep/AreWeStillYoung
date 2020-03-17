@@ -62,7 +62,7 @@ class PSeg extends Entity {
 			ellipse(w.p.x/2,0, w.p.x,w.p.y);
 			break;
 			case 2: // Petal
-			triangle(w.p.x,0, 0,w.p.x, 0,-w.p.x);
+			triangle(-w.p.x/2,0, 0,w.p.y, w.p.x/2,0);
 			break;
 		}
 		translate(w.p.x,0,0);

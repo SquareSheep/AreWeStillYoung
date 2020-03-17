@@ -1,40 +1,3 @@
-class Rose extends Plant {
-	float angR = 0.1; // Angle range
-	float angT = random(-0.1,0.1);
-	int nofPetals = (int)random(8,10);
-	int nofRings = 3;
-
-	Rose(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR) {
-		super(x,y,z, w, ax,ay,az);
-		this.maxLevel = (int)maxLevel;
-		this.angR = angR;
-	}
-
-	Rose(float x, float y, float z, float w, float ax, float ay, float az) {
-		super(x,y,z, w, ax,ay,az);
-		maxLevel = (int)random(8,16);
-	}
-
-	Rose(float x, float y, float z, float w) {
-		this(x,y,z,w, 0,0,-PI/2);
-	}
-
-	void grow() {
-		if (alive && tips.get(0).level < maxLevel-1) {
-			tips.add(segs.add(tips.get(0), 0, w.p.x,0,0, random(-angR,angR),random(-angR,angR),angT+random(-angR,angR)));
-			tips.remove(0);
-		} else if (alive && tips.get(0).level == maxLevel-1 && tips.get(0).children.size() < nofPetals) {
-			float a = randomR(0.6,1.5);
-			for (float k = 0 ; k < nofRings ; k ++) {
-				for (float i = 0 ; i < nofPetals*(1+k*0.2) ; i ++) {
-					segs.add(tips.get(0), 2, w.p.x*k,w.p.x/4,0, k*0.1,a,i/nofPetals*2*PI);
-				}
-			}
-		}
-		
-	}
-}
-
 class Daisy extends Plant {
 	float angR = 0.1; // Angle range
 	float angT = random(-0.1,0.1);
@@ -64,19 +27,10 @@ class Daisy extends Plant {
 		} else if (alive && tips.get(0).children.size() < nofPetals) {
 			float a = randomR(0.6,1.5);
 			for (float i = 0 ; i < nofPetals ; i ++) {
-				segs.add(tips.get(0), 1, w.p.x,w.p.x/4,0, 0,a,i/nofPetals*2*PI);
+				segs.add(tips.get(0), 2, w.p.x/3,w.p.x,0, 0,a,i/nofPetals*2*PI);
 			}
 		}
 	}
-
-	// void render() {
-	// 	super.render();
-	// 	for (int i = 0 ; i < tips.size() ; i ++) {
-	// 		if (tips.get(i) != root) {
-	// 			text(tips.get(i).children.size(), tempX, tempY);
-	// 		}
-	// 	}
-	// }
 }
 
 class Tree extends Plant {
@@ -94,7 +48,7 @@ class Tree extends Plant {
 	}
 
 	Tree(float x, float y, float z, float w, float ax, float ay, float az) {
-		super(x,y,z, w, ax,ay,az);
+		this(x,y,z, w, ax,ay,az, 5, 0.6, 2);
 	}
 
 	Tree(float x, float y, float z, float w) {
@@ -109,7 +63,7 @@ class Tree extends Plant {
 					if (tips.get(i).level > 1) {
 						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR),random(-angR,angR),random(-angR,angR)));
 					} else {
-						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR*0.3,angR*0.3),random(-angR*0.3,angR*0.3),random(-angR*0.3,angR*0.3)));
+						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR)*0.6,random(-angR,angR)*0.6,random(-angR,angR)*0.6));
 					}
 				}
 			}
@@ -151,11 +105,16 @@ class Fern extends Plant {
 
 class Curl extends Plant {
 	float angR = 0.3; // Angle range
-	float angT = random(1,1.7);
+	float angT = random(0.5,0.8);
+
+	Curl(float x, float y, float z, float w, float ax, float ay, float az, float maxLevel, float angR) {
+		super(x,y,z, w, ax,ay,az);
+		this.maxLevel = (int)maxLevel; this.angR = angR;
+	}
 
 	Curl(float x, float y, float z, float w, float ax, float ay, float az) {
 		super(x,y,z, w, ax,ay,az);
-		maxLevel = (int)random(8,16);
+		maxLevel = (int)random(8,12);
 	}
 
 	Curl(float x, float y, float z, float w) {
