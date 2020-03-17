@@ -21,8 +21,7 @@ class TextHolder {
 		y = (y-1)*fontW*1.3;
 		z *= fontW;
 		for (int i = 0 ; i < ar.length ; i ++) {
-			Float mob = far.add(ar[i].x + x,ar[i].y + y,z);
-			mob.lifeSpan = (int)random(minLifeSpan, maxLifeSpan);
+			far.add(ar[i].x + x,ar[i].y + y,z).lifeSpan = (int)random(minLifeSpan, maxLifeSpan);
 		}
 	}
 

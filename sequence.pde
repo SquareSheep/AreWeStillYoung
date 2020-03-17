@@ -294,7 +294,7 @@ void instantEvents() {
 			tree.av.reset(0,-0.006,0);
 			mobs.add(tree);
 		}
-		for (int o = 0 ; o < 5 ; o ++) {
+		for (int o = 0 ; o < 2 ; o ++) {
 			Float mob = far.add(randomR(de),randomR(de), randomR(de), random(de*0.01,de*0.03));
 			mob.pv.reset(randomR(3),randomR(3),randomR(3));
 			mob.lifeSpan = 360;
@@ -320,17 +320,21 @@ void instantEvents() {
 		segSetFill(166,166,166, 125,75,-55);
 		floatSetFill(125,125,125, -155,155,155);
 	} // Lyrics 2
-	else if (beatInRange(233,297)) {
+	else if (beatInRange(233,296)) {
 		if (currBeat == 233) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else if (currBeat == 234) {
+			far.ar.clear();
+			far.arm = 0;
+			segs.ar.clear();
+			segs.arm = 0;
+			par.clear();
 		}
-		if (currBeat == 103.5 || currBeat == 135.75) {
+		if (currBeat == 249.5 || currBeat == 272) {
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
-		} else if (currBeat < 297) {
-			Float mob = far.add(random(-de,de),random(-de,de),random(-de,0), random(de*0.03,de*0.06), 0,0,0);
-			mob.pv.reset(random(-3,3),random(-3,3),random(-3,3));
-			mob.lifeSpan = 600;
+		} else if (currBeat < 296) {
+			Float mob = far.add(random(-de,de),random(-de,de),random(-de,0), random(de*0.03,de*0.06), 0,0,0).pv.reset(random(-3,3),random(-3,3),random(-3,3));
 		}
 		if (currBeat == 235.5) textMap.get("time").draw(-1.2,0,0, 239);
 		if (currBeat == 236.5) textMap.get("runs").draw(1.2,0,0, 239);
@@ -381,14 +385,48 @@ void instantEvents() {
 		if (currBeat == 288) textMap.get("we").draw(1.1,0,0, 294.5);
 		if (currBeat == 288.75) textMap.get("still").draw(0,1,0, 294.5);
 
-		lyricsSinWaves();
+		//lyricsSinWaves();
 		floatSetFill(255,125,125, -100,-125,125);
 	} // Drop vocal
-	else if (beatInRange(297,298)) {
+	/*else if (beatInRange(296,299)) {
+		if (currBeat == 296) {
+			for (Plant plant : par) plant.die();
+		} else {
+			for (int o = 0 ; o < 15 ; o ++) {
+				Float mob = far.add(randomR(de),randomR(de), randomR(de), random(de*0.01,de*0.03));
+				mob.pv.reset(randomR(10),randomR(10),randomR(10));
+			}
+			for (int o = 0 ; o < 10 ; o ++) {
+				Plant mob;
+				switch((int)random(4)) {
+					case 0:
+					mob = new Daisy(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 6, random(0.1,0.5));
+					break;
+					case 1:
+					mob = new Fern(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 15, random(0.1,0.5));
+					break;
+					case 2:
+					mob = new Tree(0,0,0, de*0.2, random(-PI,PI),random(-PI,PI),random(-PI,PI), 8, random(0.1,0.5),2);
+					break;
+					default:
+					mob = new Curl(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 15, random(0.1,0.5));
+				}
+				mob.av.reset(0,-0.02,0);
+				mobs.add(mob);
+			}
+			for (Plant plant : par) plant.grow(5);
+		}
+		segSetWPM(0.05,8);
+		segSetAngPM(0.005,8);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
 	} // Yell cry sounds 5
-	else if (beatInRange(298,333)) {
-
-	}
+	else if (beatInRange(299,333)) {
+		if (currBeat == 299) {
+			for (Plant plant : par) plant.die();
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		}
+	}*/
 	segSetIndex();
 	plantSetIndex();
 }
@@ -428,6 +466,9 @@ void keyboardInput() {
 		break;
 		case '0':
 		setTime(139691,258);
+		break;
+		case 'q':
+		setTime(160473,296);
 		break;
 	}
 }
