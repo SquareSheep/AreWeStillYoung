@@ -1,3 +1,12 @@
+void lyricsSinWaves() {
+	for (int i = 0 ; i < far.arm ; i ++) {
+		t = (float)i/far.arm+(float)frameCount/120;
+		Float mob = far.get(i);
+		mob.setIndex(i%binCount);
+		mob.p.P.z += sin(t*2*PI)*10;
+	}
+}
+
 void screamTrees() {
 	t = (float)frameCount/30;
 	for (int o = 0 ; o < 10 ; o ++) far.add(random(-de,de),random(-de,de*0.25),random(-de,0), random(de*0.02,de*0.06)).pv.reset(15*noise(t+10),5*noise(t),25);

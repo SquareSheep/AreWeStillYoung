@@ -14,7 +14,7 @@ class Daisy extends Plant {
 
 	Daisy(float x, float y, float z, float w, float ax, float ay, float az) {
 		super(x,y,z, w, ax,ay,az);
-		maxLevel = (int)random(8,16);
+		maxLevel = (int)random(3,6);
 	}
 
 	Daisy(float x, float y, float z, float w) {
@@ -63,7 +63,7 @@ class Tree extends Plant {
 					if (tips.get(i).level > 1) {
 						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR),random(-angR,angR),random(-angR,angR)));
 					} else {
-						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR)*0.6,random(-angR,angR)*0.6,random(-angR,angR)*0.6));
+						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR)*0.1,random(-angR,angR)*0.1,random(-angR,angR)*0.1));
 					}
 				}
 			}

@@ -30,6 +30,10 @@ float randomR(float minR, float maxR) {
 	}
 }
 
+float randomR(float r) {
+	return random(-r,r);
+}
+
 int randomD() {
 	if (random(1) > 0.5) {
 		return 1;

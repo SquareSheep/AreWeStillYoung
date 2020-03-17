@@ -18,12 +18,17 @@ class TextHolder {
 
 	void draw(float x, float y, float z, int minLifeSpan, int maxLifeSpan) {
 		x *= fontW;
-		y = (y-1.4)*fontW;
+		y = (y-1)*fontW*1.3;
 		z *= fontW;
 		for (int i = 0 ; i < ar.length ; i ++) {
 			Float mob = far.add(ar[i].x + x,ar[i].y + y,z);
 			mob.lifeSpan = (int)random(minLifeSpan, maxLifeSpan);
 		}
+	}
+
+	void draw(float x, float y, float z, float lastBeat) {
+		float beatSpan = (lastBeat-currBeat)*fpb;
+		draw(x,y,z,(int)(beatSpan*0.9),(int)beatSpan);
 	}
 	
 	void draw(float x, float y, float z) {

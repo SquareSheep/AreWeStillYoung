@@ -63,8 +63,8 @@ void setup() {
   textMap.put("of", new TextHolder("of"));
   textMap.put("cotton", new TextHolder("cotton"));
   textMap.put("candy", new TextHolder("candy"));
-  textMap.put("clouds", new TextHolder("clouds"));
-  textMap.put("and", new TextHolder("And"));
+  textMap.put("clouds", new TextHolder("Clouds"));
+  textMap.put("and", new TextHolder("and"));
   textMap.put("jars", new TextHolder("jars"));
   textMap.put("fireflies", new TextHolder("fireflies"));
   textMap.put("now", new TextHolder("Now"));
@@ -91,8 +91,8 @@ void setup() {
   textMap.put("to", new TextHolder("to"));
   textMap.put("be", new TextHolder("be"));
   textMap.put("skeptical", new TextHolder("skeptical"));
-  textMap.put("Of", new TextHolder("Of"));
-  textMap.put("those", new TextHolder("those"));
+  textMap.put("Of", new TextHolder("of"));
+  textMap.put("those", new TextHolder("Those"));
   textMap.put("with", new TextHolder("with"));
   textMap.put("good", new TextHolder("good"));
   textMap.put("intentions", new TextHolder("intentions"));
