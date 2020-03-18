@@ -97,6 +97,7 @@ class Fern extends Plant {
 		if (alive && tips.get(0).level < maxLevel) {
 			if (tips.get(0).level < maxLevel-1) tips.add(segs.add(tips.get(0), 0, w.p.x,0,0, random(angR),random(angR),angT-random(angR)));
 			segs.add(tips.get(0), 1, w.p.x,w.p.x/2,0, random(-angR,angR),random(-angR,angR),angT-random(-angR,angR)+PI/2);
+			segs.add(tips.get(0), 1, w.p.x,w.p.x/2,0, random(-angR,angR)+PI,random(-angR,angR),angT-random(-angR,angR)+PI/2);
 			if (tips.get(0).level == maxLevel-1) tips.add(segs.get());
 			tips.remove(0);
 		}

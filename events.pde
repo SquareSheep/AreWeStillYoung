@@ -1,3 +1,11 @@
+void clearAll() {
+	far.ar.clear();
+	far.arm = 0;
+	segs.ar.clear();
+	segs.arm = 0;
+	par.clear();
+}
+
 void lyricsSinWaves() {
 	for (int i = 0 ; i < far.arm ; i ++) {
 		t = (float)i/far.arm+(float)frameCount/120;

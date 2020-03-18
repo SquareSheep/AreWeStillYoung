@@ -176,8 +176,55 @@ void instantEvents() {
 		lyricsSinWaves();
 		floatSetFill(125,125,255, -100,125,-100);
 	} // Yell cry sounds 1
-	else if (beatInRange(136,169)) {
+	else if (beatInRange(136,152)) {
 		if (currBeat == 136) {
+			for (Plant plant : par) plant.die();
+			for (int i = 0 ; i < far.arm ; i ++) far.get(i).lifeSpan = 0;
+			cam.ang.P.set(0,0,0);
+		} else if (currBeatF == 144 || currBeatF == 160) {
+			for (Plant plant : par) plant.die();
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else if (beatInRange(151.25,152.25)) {
+			for (Plant plant : par) plant.kill(2);
+			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+		} else if (beatInRange(166.5,169)) {
+			if (par.size() > 0) for (int o = 0 ; o < 3 ; o ++) par.get((int)random(par.size())).die();
+		} else {
+			yellCryMain();
+		}
+
+		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*1.1) par.get(i).die();
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
+	} // "Bwuhh" stab 1
+	else if (beatInRange(152,153.5)) {
+		if (currBeat == 152) {
+			for (Plant plant : par) plant.die();
+		} else {
+			float angOffset = random(PI);
+			for (float o = 0 ; o < 5 ; o ++) {
+				t = o/5;
+				Plant mob = new Fern(0,0,0, de*0.2, 0,0,t*2*PI+angOffset, random(12,15), randomR(0.1,0.2));
+				mob.rav.reset(0,0,randomR(0.01,0.03));
+				mobs.add(mob);
+			}
+			for (float o = 0 ; o < 5 ; o ++) {
+				t = o/5;
+				Plant mob = new Curl(0,0,0, de*0.1, 0,0,t*2*PI+angOffset, random(12,15), randomR(0.5,0.8));
+				mob.rav.reset(0,0,randomR(0.01,0.03));
+				mobs.add(mob);
+			}
+			for (Plant plant : par) plant.grow(5);
+			segSetWPM(0.05,8);
+			segSetAngPM(0.005,8);
+			segSetFill(125,222,75, 75,-125,75);
+			floatSetFill(125,175,255, 125,125,125);
+		}
+	} // Yell cry sounds 2
+	else if (beatInRange(153.5,169)) {
+		if (currBeat == 153.5) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.get(i).lifeSpan = 0;
 			cam.ang.P.set(0,0,0);
@@ -211,7 +258,7 @@ void instantEvents() {
 		segSetAngPM(0.005,8);
 		segSetFill(166,106,22, 75,55,15);
 		floatSetFill(125,75,75, -55,-55,55);
-	} // Yell cry sounds 2
+	} // Yell cry sounds 3
 	else if (beatInRange(176,184)) {
 		if (currBeat == 176) {
 			for (Plant plant : par) plant.die();
@@ -229,7 +276,7 @@ void instantEvents() {
 		segSetAngPM(0.005,8);
 		segSetFill(125,222,75, 75,-125,75);
 		floatSetFill(125,175,255, 125,125,125);
-	} //"Bwuhh" stab
+	} //"Bwuhh" stab 2
 	else if (beatInRange(184,186)) {
 		if (currBeat == 184) {
 			for (Plant plant : par) plant.die();
@@ -273,7 +320,7 @@ void instantEvents() {
 			for (int i = 0 ; i < far.arm ; i ++) far.get(i).lifeSpan = 0;
 			cam.ang.P.set(0,0,0);
 		} else if (currBeat > 198) {
-			for (Plant plant : par) plant.kill(1);
+			for (Plant plant : par) plant.kill(2);
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
 		} else {
 			yellCryMain();
@@ -285,8 +332,8 @@ void instantEvents() {
 		segSetFill(125,222,75, 75,-125,75);
 		floatSetFill(125,175,255, 125,125,125);
 	} // Quiet bridge
-	else if (beatInRange(200,233)) {
-		if (currBeat == 200) {
+	else if (beatInRange(200.5,233)) {
+		if (currBeat == 200.5) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.get(i).lifeSpan = 0;
 			cam.ang.P.set(0,0,0);
@@ -320,96 +367,95 @@ void instantEvents() {
 		segSetFill(166,166,166, 125,75,-55);
 		floatSetFill(125,125,125, -155,155,155);
 	} // Lyrics 2
-	else if (beatInRange(233,296)) {
+	else if (beatInRange(233,294)) {
 		if (currBeat == 233) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
 		} else if (currBeat == 234) {
-			far.ar.clear();
-			far.arm = 0;
-			segs.ar.clear();
-			segs.arm = 0;
-			par.clear();
+			clearAll();
 		}
-		if (currBeat == 249.5 || currBeat == 272) {
+		float st = 233.5;
+		if (currBeat == st + 14.5 || currBeat == st + 31) {
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
-		} else if (currBeat < 296) {
-			Float mob = far.add(random(-de,de),random(-de,de),random(-de,0), random(de*0.03,de*0.06), 0,0,0).pv.reset(random(-3,3),random(-3,3),random(-3,3));
+		} else {
+			far.add(random(-de,de),random(-de,de),random(-de,0), random(de*0.03,de*0.06), 0,0,0).pv.reset(random(-3,3),random(-3,3),random(-3,3));
 		}
-		if (currBeat == 235.5) textMap.get("time").draw(-1.2,0,0, 239);
-		if (currBeat == 236.5) textMap.get("runs").draw(1.2,0,0, 239);
-		if (currBeat == 237.5) textMap.get("me").draw(-1.4,1,0, 239);
-		if (currBeat == 238) textMap.get("over").draw(0.7,1,0, 239);
+		if (currBeat == st + 0.5) textMap.get("time").draw(-1.2,0,0, st + 4);
+		if (currBeat == st + 1.5) textMap.get("runs").draw(1.2,0,0, st + 4);
+		if (currBeat == st + 2.5) textMap.get("me").draw(-1.4,1,0, st + 4);
+		if (currBeat == st + 3) textMap.get("over").draw(0.7,1,0, st + 4);
 
-		if (currBeat == 239.5) textMap.get("and").draw(-1,1,0, 242);
-		if (currBeat == 240.5) textMap.get("I've").draw(1,1,0, 242);
+		if (currBeat == st + 4.5) textMap.get("and").draw(-1,1,0, st + 7);
+		if (currBeat == st + 5.5) textMap.get("I've").draw(1,1,0, st + 7);
 
-		if (currBeat == 242.5) textMap.get("grown").draw(-1.5,0,0, 249.5);
-		if (currBeat == 243.5) textMap.get("some").draw(1.3,0,0, 249.5);
-		if (currBeat == 244) textMap.get("thicker").draw(0,1,0, 249.5);
-		if (currBeat == 245.75) textMap.get("skin").draw(0,2,0, 249.5);
+		if (currBeat == st + 7.5) textMap.get("grown").draw(-1.5,0,0, st + 14.5);
+		if (currBeat == st + 8.5) textMap.get("some").draw(1.3,0,0, st + 14.5);
+		if (currBeat == st + 9) textMap.get("thicker").draw(0,1,0, st + 14.5);
+		if (currBeat == st + 10.75) textMap.get("skin").draw(0,2,0, st + 14.5);
 
-		if (currBeat == 251.5) textMap.get("learned").draw(0,0,0, 258);
-		if (currBeat == 252.5) textMap.get("to").draw(-0.7,1,0, 258);
-		if (currBeat == 253.5) textMap.get("be").draw(0.7,1,0, 258);
-		if (currBeat == 254) textMap.get("skeptical").draw(-0.8,2,0, 258);
-		if (currBeat == 256.5) textMap.get("of").draw(1.9,2,0, 258);
+		if (currBeat == st + 16.5) textMap.get("learned").draw(0,0,0, st + 23);
+		if (currBeat == st + 17.5) textMap.get("to").draw(-0.7,1,0, st + 23);
+		if (currBeat == st + 18.5) textMap.get("be").draw(0.7,1,0, st + 23);
+		if (currBeat == st + 19) textMap.get("skeptical").draw(-0.8,2,0, st + 23);
+		if (currBeat == st + 21.5) textMap.get("of").draw(1.9,2,0, st + 23);
 
-		if (currBeat == 258.5) textMap.get("those").draw(0,0,0, 266);
-		if (currBeat == 259.5) textMap.get("with").draw(-1.15,1,0, 266);
-		if (currBeat == 260) textMap.get("good").draw(1.15,1,0, 266);
-		if (currBeat == 261) textMap.get("intentions").draw(0,2,0, 266);
+		if (currBeat == st + 23.5) textMap.get("those").draw(0,0,0, st + 31);
+		if (currBeat == st + 24.5) textMap.get("with").draw(-1.15,1,0, st + 31);
+		if (currBeat == st + 25) textMap.get("good").draw(1.15,1,0, st + 31);
+		if (currBeat == st + 26) textMap.get("intentions").draw(0,2,0, st + 31);
 
-		if (currBeat == 267) textMap.get("why").draw(-1.4,0,0, 272);
-		if (currBeat == 268.75) textMap.get("is").draw(0.3,0,0, 272);
-		if (currBeat == 269) textMap.get("it").draw(1.4,0,0, 272);
-		if (currBeat == 269.5) textMap.get("hard").draw(-0.7,1,0, 272);
-		if (currBeat == 270.5) textMap.get("to").draw(1.3,1,0, 272);
-		if (currBeat == 271.5) textMap.get("love").draw(0,2,0, 272);
+		if (currBeat == st + 32) textMap.get("why").draw(-1.4,0,0, st + 37);
+		if (currBeat == st + 33.75) textMap.get("is").draw(0.3,0,0, st + 37);
+		if (currBeat == st + 34) textMap.get("it").draw(1.4,0,0, st + 37);
+		if (currBeat == st + 34.5) textMap.get("hard").draw(-0.7,1,0, st + 37);
+		if (currBeat == st + 35.5) textMap.get("to").draw(1.3,1,0, st + 37);
+		if (currBeat == st + 36.5) textMap.get("love").draw(0,2,0, st + 37);
 
-		if (currBeat == 272.5) textMap.get("without").draw(0,0,0, 278.75);
-		if (currBeat == 274.5) textMap.get("hurting").draw(0,1,0, 278.75);
-		if (currBeat == 275.5) textMap.get("anyone").draw(0,2,0, 278.75);
+		if (currBeat == st + 37.5) textMap.get("without").draw(0,0,0, st + 43.75);
+		if (currBeat == st + 39.5) textMap.get("hurting").draw(0,1,0, st + 43.75);
+		if (currBeat == st + 40.5) textMap.get("anyone").draw(0,2,0, st + 43.75);
 
-		if (currBeat == 280) textMap.get("are").draw(-0.9,0,0, 283);
-		if (currBeat == 280.5) textMap.get("we").draw(1.1,0,0, 283);
-		if (currBeat == 281.25) textMap.get("still").draw(0,1,0, 283);
-		if (currBeat == 282.25) textMap.get("young").draw(0,2,0, 283);
+		if (currBeat == st + 45) textMap.get("are").draw(-0.9,0,0, st + 48);
+		if (currBeat == st + 45.5) textMap.get("we").draw(1.1,0,0, st + 48);
+		if (currBeat == st + 46.25) textMap.get("still").draw(0,1,0, st + 48);
+		if (currBeat == st + 47.25) textMap.get("young").draw(0,2,0, st + 48);
 
-		if (currBeat == 284) textMap.get("are").draw(-0.9,0,0, 287);
-		if (currBeat == 284.5) textMap.get("we").draw(1.1,0,0, 287);
-		if (currBeat == 285.25) textMap.get("still").draw(0,1,0, 287);
-		if (currBeat == 286.25) textMap.get("young").draw(0,2,0, 287);
+		if (currBeat == st + 49) textMap.get("are").draw(-0.9,0,0, st + 52);
+		if (currBeat == st + 49.5) textMap.get("we").draw(1.1,0,0, st + 52);
+		if (currBeat == st + 50.25) textMap.get("still").draw(0,1,0, st + 52);
+		if (currBeat == st + 51.25) textMap.get("young").draw(0,2,0, st + 52);
 
-		if (currBeat == 287.5) textMap.get("are").draw(-0.9,0,0, 294.5);
-		if (currBeat == 288) textMap.get("we").draw(1.1,0,0, 294.5);
-		if (currBeat == 288.75) textMap.get("still").draw(0,1,0, 294.5);
+		if (currBeat == st + 52.5) textMap.get("are").draw(-0.9,0,0, st + 59.5);
+		if (currBeat == st + 53) textMap.get("we").draw(1.1,0,0, st + 59.5);
+		if (currBeat == st + 53.75) textMap.get("still").draw(0,1,0, st + 59.5);
 
-		//lyricsSinWaves();
+		lyricsSinWaves();
 		floatSetFill(255,125,125, -100,-125,125);
 	} // Drop vocal
-	/*else if (beatInRange(296,299)) {
-		if (currBeat == 296) {
+	else if (beatInRange(294,297)) {
+		if (currBeat == 294) {
 			for (Plant plant : par) plant.die();
-		} else {
-			for (int o = 0 ; o < 15 ; o ++) {
+		} else if (currBeat == 295) {
+			clearAll();
+		} else if (currBeat >= 295) {
+			for (int o = 0 ; o < 5 ; o ++) {
 				Float mob = far.add(randomR(de),randomR(de), randomR(de), random(de*0.01,de*0.03));
 				mob.pv.reset(randomR(10),randomR(10),randomR(10));
 			}
-			for (int o = 0 ; o < 10 ; o ++) {
+			for (int o = 0 ; o < 5 ; o ++) {
 				Plant mob;
 				switch((int)random(4)) {
 					case 0:
-					mob = new Daisy(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 6, random(0.1,0.5));
+					mob = new Daisy(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 4, random(0.1,0.5));
 					break;
 					case 1:
 					mob = new Fern(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 15, random(0.1,0.5));
 					break;
 					case 2:
-					mob = new Tree(0,0,0, de*0.2, random(-PI,PI),random(-PI,PI),random(-PI,PI), 8, random(0.1,0.5),2);
+					mob = new Tree(0,0,0, de*0.25, random(-PI,PI),random(-PI,PI),random(-PI,PI), 6, 0.6,2);
 					break;
 					default:
-					mob = new Curl(0,0,0, de*0.15, random(-PI,PI),random(-PI,PI),random(-PI,PI), 15, random(0.1,0.5));
+					mob = new Curl(0,0,0, de*0.25, random(-PI,PI),random(-PI,PI),random(-PI,PI), 15, random(0.3,0.5));
 				}
 				mob.av.reset(0,-0.02,0);
 				mobs.add(mob);
@@ -420,13 +466,53 @@ void instantEvents() {
 		segSetAngPM(0.005,8);
 		segSetFill(125,222,75, 75,-125,75);
 		floatSetFill(125,175,255, 125,125,125);
-	} // Yell cry sounds 5
-	else if (beatInRange(299,333)) {
-		if (currBeat == 299) {
+	} // Yell waves
+	else if (beatInRange(297,333)) {
+		if (currBeat == 297) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
+				cam.ang.P.set(-0.4,0,0);
 		}
-	}*/
+
+		for (float i = 0 ; i < 10 ; i ++) {
+			float ang = random(-PI,PI);
+			float dist = random(de*0.7,de*1.2);
+			Float mob = far.add(cos(ang)*dist,sin(ang)*dist,random(-de,de), random(de*0.02,de*0.06));
+			mob.pv.reset(0,10,15);
+			mob.pv.pm.set(0,0,3);
+			mob.p.mass = 3;
+			mob.p.vMult = 0;
+			mob.pv.mass = 3;
+			mob.pv.vMult = 0;
+		}
+		int num = 6;
+		for (float i = 0 ; i < num ; i ++) {
+			t = i/num - 0.5;
+			Plant mob;
+			switch((int)random(2)) {
+				case 0:
+				mob = new Daisy(0,0,0, de*0.13, 0,0,-PI/2, random(4,6), random(0.1,0.5));
+				break;
+				default:
+				mob = new Fern(0,0,0, de*0.13, 0,0,-PI/2, random(6,12), random(0.5,0.9));
+			}
+			mob.p.reset(t*de*3,de*0.65,-de*2.5);
+			mob.p.mass = 3;
+			mob.p.vMult = 0;
+			mob.pv.mass = 3;
+			mob.pv.vMult = 0;
+			mob.pv.reset(0,0,5);
+			mob.pv.pm.set(0,0.2,1.5);
+			mob.av.pm.set(0.0001,randomR(0.001,0.001),0);
+			mobs.add(mob);
+		}
+		for (Plant plant : par) plant.grow(5);
+		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*0.6) par.get(i).die();
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
+	}
 	segSetIndex();
 	plantSetIndex();
 }
@@ -462,13 +548,13 @@ void keyboardInput() {
 		setTime(108622,199);
 		break;
 		case '9':
-		setTime(125527,232);
+		setTime(125527,231);
 		break;
 		case '0':
-		setTime(139691,258);
+		setTime(139691,257);
 		break;
 		case 'q':
-		setTime(160473,296);
+		setTime(159915,294);
 		break;
 	}
 }

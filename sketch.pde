@@ -11,7 +11,7 @@ static float fillVMult = 0.1;
 static float fftThreshold = 1;
 static float fftPow = 1.7;
 static float fftAmp = 2;
-static float volumeGain = -11;
+static float volumeGain = -30;
 static String songName = "../Music/arewestillyoung.mp3";
 
 IColor defaultFill = new IColor(125,125,125,255);
