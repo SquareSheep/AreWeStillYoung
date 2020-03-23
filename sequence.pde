@@ -29,7 +29,6 @@ Drop: 297
 
 362 quiet part, outro
 394 song end
-
 */
 
 void instantEvents() {
@@ -99,7 +98,7 @@ void instantEvents() {
 				far.add(random(-de,de),random(-de,de),random(-de,de), random(de*0.02,de*0.1), 0,0,0).pv.reset(random(-10,10),random(-10,10),random(-10,10));
 			}
 		} else if (currBeat < 72) {
-			yellCryRing(random(6,18), randomR(0.005,0.02), 3);
+			yellCryRing(random(6,15), randomR(0.005,0.02), 2);
 		}
 		for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(3);
 		segSetWPM(0.5,8);
@@ -117,7 +116,7 @@ void instantEvents() {
 		} else if (currBeat < 135) {
 			Float mob = far.add(random(-de,de),random(-de,de),random(-de,0), random(de*0.03,de*0.06), 0,0,0);
 			mob.pv.reset(random(-3,3),random(-3,3),random(-3,3));
-			mob.lifeSpan = 600;
+			mob.lifeSpan = 240;
 		}
 
 		if (currBeat == 73.5) textMap.get("when").draw(0,0,0, 77);
@@ -337,30 +336,31 @@ void instantEvents() {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.get(i).lifeSpan = 0;
 			cam.ang.P.set(0,0,0);
-			Plant tree = new Tree(0,de*0.5,0, de*0.15, 0,0,-PI/2, 9,0.5,2);
+			Plant tree = new Tree(0,de*0.5,0, de*0.18, 0,0,-PI/2, 8,0.5,2);
 			tree.av.reset(0,-0.006,0);
 			mobs.add(tree);
 		}
-		for (int o = 0 ; o < 2 ; o ++) {
-			Float mob = far.add(randomR(de),randomR(de), randomR(de), random(de*0.01,de*0.03));
+		for (int o = 0 ; o < 3 ; o ++) {
+			Float mob = far.add(randomR(de),randomR(de), randomR(de), random(de*0.015,de*0.04));
 			mob.pv.reset(randomR(3),randomR(3),randomR(3));
-			mob.lifeSpan = 360;
 		}
-		Plant mob;
-		switch((int)random(3)) {
-			case 0:
-			mob = new Daisy(0,de*0.5,0, de*0.05, 0,0,-PI/2);
-			break;
-			case 1:
-			mob = new Fern(0,de*0.5,0, de*0.05, 0,0,-PI/2);
-			break;
-			default:
-			mob = new Curl(0,de*0.5,0, de*0.05, 0,0,-PI/2);
+		if (currBeat % 1 == 0) {
+			Plant mob;
+			switch((int)random(3)) {
+				case 0:
+				mob = new Daisy(0,de*0.5,0, de*0.05, 0,0,-PI/2);
+				break;
+				case 1:
+				mob = new Fern(0,de*0.5,0, de*0.05, 0,0,-PI/2);
+				break;
+				default:
+				mob = new Curl(0,de*0.5,0, de*0.05, 0,0,-PI/2);
+			}
+			mob.r.reset(0,0,random(de*0.75));
+			mob.rang.reset(0,random(-PI,PI),0);
+			mob.rav.reset(0,-0.006,0);
+			mobs.add(mob);
 		}
-		mob.r.reset(0,0,random(de*0.75));
-		mob.rang.reset(0,random(-PI,PI),0);
-		mob.rav.reset(0,-0.006,0);
-		mobs.add(mob);
 		for (Plant plant : par) plant.grow();
 		segSetWPM(0.1,10);
 		segSetAngPM(0.005,10);
@@ -467,13 +467,22 @@ void instantEvents() {
 		segSetFill(125,222,75, 75,-125,75);
 		floatSetFill(125,175,255, 125,125,125);
 	} // Yell waves
-	else if (beatInRange(297,333)) {
+	else if (beatInRange(297,313)) {
 		if (currBeat == 297) {
 			for (Plant plant : par) plant.die();
 			for (int i = 0 ; i < far.arm ; i ++) far.ar.get(i).lifeSpan = 0;
 				cam.ang.P.set(-0.4,0,0);
 		}
 
+		yellWaves(7, 3,3,0.3);
+
+		segSetWPM(0.25,8);
+		segSetAngPM(0.005,8);
+		segSetFill(125,222,75, 75,-125,75);
+		floatSetFill(125,175,255, 125,125,125);
+	}
+	// Yell circle
+	else if (beatInRange(313,400)) {
 		for (float i = 0 ; i < 10 ; i ++) {
 			float ang = random(-PI,PI);
 			float dist = random(de*0.7,de*1.2);
@@ -485,7 +494,7 @@ void instantEvents() {
 			mob.pv.mass = 3;
 			mob.pv.vMult = 0;
 		}
-		int num = 6;
+		float num = 5;
 		for (float i = 0 ; i < num ; i ++) {
 			t = i/num - 0.5;
 			Plant mob;
@@ -494,7 +503,7 @@ void instantEvents() {
 				mob = new Daisy(0,0,0, de*0.13, 0,0,-PI/2, random(4,6), random(0.1,0.5));
 				break;
 				default:
-				mob = new Fern(0,0,0, de*0.13, 0,0,-PI/2, random(6,12), random(0.5,0.9));
+				mob = new Fern(0,0,0, de*0.13, 0,0,-PI/2, random(7,10), random(0.5,0.9));
 			}
 			mob.p.reset(t*de*3,de*0.65,-de*2.5);
 			mob.p.mass = 3;
@@ -507,11 +516,6 @@ void instantEvents() {
 			mobs.add(mob);
 		}
 		for (Plant plant : par) plant.grow(5);
-		for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*0.6) par.get(i).die();
-		segSetWPM(0.25,8);
-		segSetAngPM(0.005,8);
-		segSetFill(125,222,75, 75,-125,75);
-		floatSetFill(125,175,255, 125,125,125);
 	}
 	segSetIndex();
 	plantSetIndex();

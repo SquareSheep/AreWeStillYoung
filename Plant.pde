@@ -27,7 +27,7 @@ class Daisy extends Plant {
 		} else if (alive && tips.get(0).children.size() < nofPetals) {
 			float a = randomR(0.6,1.5);
 			for (float i = 0 ; i < nofPetals ; i ++) {
-				segs.add(tips.get(0), 2, w.p.x/3,w.p.x,0, 0,a,i/nofPetals*2*PI);
+				segs.add(tips.get(0), 2, w.p.x,0,0, 0,a,i/nofPetals*2*PI);
 			}
 		}
 	}
@@ -61,9 +61,9 @@ class Tree extends Plant {
 			for (int i = 0 ; i < prevTips ; i ++) {
 				for (int o = 0 ; o < bf ; o ++) {
 					if (tips.get(i).level > 1) {
-						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR),random(-angR,angR),random(-angR,angR)));
+						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,w.p.x/6, random(-angR,angR),random(-angR,angR),random(-angR,angR)));
 					} else {
-						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,0, random(-angR,angR)*0.1,random(-angR,angR)*0.1,random(-angR,angR)*0.1));
+						tips.add(segs.add(tips.get(i), 0, w.p.x,w.p.x/6,w.p.x/6, random(-angR,angR)*0.1,random(-angR,angR)*0.1,random(-angR,angR)*0.1));
 					}
 				}
 			}
@@ -95,9 +95,9 @@ class Fern extends Plant {
 
 	void grow() {
 		if (alive && tips.get(0).level < maxLevel) {
-			if (tips.get(0).level < maxLevel-1) tips.add(segs.add(tips.get(0), 0, w.p.x,0,0, random(angR),random(angR),angT-random(angR)));
-			segs.add(tips.get(0), 1, w.p.x,w.p.x/2,0, random(-angR,angR),random(-angR,angR),angT-random(-angR,angR)+PI/2);
-			segs.add(tips.get(0), 1, w.p.x,w.p.x/2,0, random(-angR,angR)+PI,random(-angR,angR),angT-random(-angR,angR)+PI/2);
+			if (tips.get(0).level < maxLevel-1) tips.add(segs.add(tips.get(0), 0, w.p.x,w.p.x/6,w.p.x/6, random(angR),random(angR),angT-random(angR)));
+			segs.add(tips.get(0), 1, w.p.x,w.p.x*0.5,w.p.x*0.1, random(-angR,angR),random(-angR,angR),angT-random(-angR,angR)+PI/2);
+			segs.add(tips.get(0), 1, w.p.x,w.p.x*0.5,w.p.x*0.1, random(-angR,angR)+PI,random(-angR,angR),angT-random(-angR,angR)+PI/2);
 			if (tips.get(0).level == maxLevel-1) tips.add(segs.get());
 			tips.remove(0);
 		}
@@ -124,7 +124,7 @@ class Curl extends Plant {
 
 	void grow() {
 		if (alive && tips.get(0).level < maxLevel) {
-			tips.add(segs.add(tips.get(0), 0, w.p.x,0,0, random(angR),random(angR),angT-random(angR)));
+			tips.add(segs.add(tips.get(0), 0, w.p.x,w.p.x/6,w.p.x/6, random(angR),random(angR),angT-random(angR)));
 			tips.remove(0);
 		}
 	}

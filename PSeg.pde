@@ -54,18 +54,28 @@ class PSeg extends Entity {
 		ring.w.X ++;
 		strokeStyle.strokeStyle();
 		fillStyle.fillStyle();
+		translate(w.p.x/2,0,0);
 		switch(type) {
 			case 0: // Stem
-			line(0,0,0, w.p.x,0,0);
+			box(w.p.x,w.p.x*0.1,w.p.x*0.1);
 			break;
 			case 1: // Leaf
-			ellipse(w.p.x/2,0, w.p.x,w.p.y);
+			box(w.p.x,w.p.x*0.5,w.p.x*0.2);
 			break;
 			case 2: // Petal
-			triangle(-w.p.x/2,0, 0,w.p.y, w.p.x/2,0);
+			beginShape();
+			vertex(w.p.x/2,-w.p.x/4,-w.p.x*0.1);
+			vertex(-w.p.x/2,0,0);
+			vertex(w.p.x/2,w.p.x/4,-w.p.x*0.1);
+			endShape(CLOSE);
+			beginShape();
+			vertex(w.p.x/2,-w.p.x/4,w.p.x*0.1);
+			vertex(-w.p.x/2,0,0);
+			vertex(w.p.x/2,w.p.x/4,w.p.x*0.1);
+			endShape(CLOSE);
 			break;
 		}
-		translate(w.p.x,0,0);
+		translate(w.p.x/2,0,0);
 		for (PSeg child : children) {
 			child.render();
 		}

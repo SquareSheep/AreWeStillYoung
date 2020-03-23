@@ -41,7 +41,7 @@ class Float extends MobF {
 
 	void render() {
 		setDraw();
-		circle(0,0,w.p.x);
+		box(w.p.x);
 		pop();
 	}
 }
@@ -49,10 +49,13 @@ class Float extends MobF {
 class FloatPool extends ObjectPool<Float> {
 
 	Float add(float x, float y, float z, float w, float ax, float ay, float az) {
+		Float mob;
 		if (arm == ar.size()) {
-			ar.add(new Float());
+			mob = new Float();
+			ar.add(mob);
+		} else {
+			mob = ar.get(arm);
 		}
-		Float mob = ar.get(arm);
 		mob.reset(x,y,z,w,ax,ay,az);
 		arm ++;
 		return mob;

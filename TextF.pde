@@ -13,7 +13,7 @@ class TextHolder {
 	}
 
 	TextHolder(String str) {
-		this(str,fontW,30);
+		this(str,fontW,40);
 	}
 
 	void draw(float x, float y, float z, int minLifeSpan, int maxLifeSpan) {

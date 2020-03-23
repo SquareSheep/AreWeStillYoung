@@ -26,6 +26,42 @@ void screamTrees() {
 	for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*1.1) par.get(i).die();
 }
 
+void yellWaves(int num, float pmv, float mass, float vMult) {
+	for (float i = 0 ; i < 10 ; i ++) {
+		float ang = random(-PI,PI);
+		float dist = random(de*0.7,de*1.2);
+		Float mob = far.add(cos(ang)*dist,sin(ang)*dist,random(-de,de), random(de*0.02,de*0.06));
+		mob.pv.reset(0,10,15);
+		mob.pv.pm.set(0,0,pmv);
+		mob.p.mass = 3;
+		mob.p.vMult = 0;
+		mob.pv.mass = 3;
+		mob.pv.vMult = 0;
+	}
+	for (float i = 0 ; i < num ; i ++) {
+		t = i/num - 0.5;
+		Plant mob;
+		switch((int)random(2)) {
+			case 0:
+			mob = new Daisy(0,0,0, de*0.13, 0,0,-PI/2, random(4,6), random(0.1,0.5));
+			break;
+			default:
+			mob = new Fern(0,0,0, de*0.13, 0,0,-PI/2, random(7,10), random(0.5,0.9));
+		}
+		mob.p.reset(t*de*3,de*0.65,-de*2.5);
+		mob.p.mass = 3;
+		mob.p.vMult = 0;
+		mob.pv.mass = 3;
+		mob.pv.vMult = 0;
+		mob.pv.reset(0,0,5);
+		mob.pv.pm.set(0,0.2,pmv*0.5);
+		mob.av.pm.set(0.0001,randomR(0.001,0.001),0);
+		mobs.add(mob);
+	}
+	for (Plant plant : par) plant.grow(5);
+	for (int i = 0 ; i < par.size() ; i ++) if (par.get(i).p.p.z > de*0.2) par.get(i).die();
+}
+
 void yellCryMain() {
 	for (float i = 0 ; i < 10 ; i ++) {
 		float ang = random(-PI,PI);
