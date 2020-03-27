@@ -122,7 +122,7 @@ void setup() {
 
 void draw() {
   if (timer.beat) println(song.position() + "," + (int)(currBeat));
-  background(0);
+  background(33,11,55);
   cam.render();
   update();
 

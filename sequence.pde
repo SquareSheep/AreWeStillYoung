@@ -103,8 +103,8 @@ void instantEvents() {
 		for (int i = 0 ; i < par.size() ; i ++) par.get(i).grow(3);
 		segSetWPM(0.5,8);
 		segSetAngPM(0.01,8);
-		segSetFill(100,175,100, -100,155,-100);
-		floatSetFill(125,125,255, -100,125,-100);
+		segSetFill(100,175,100, -155,155,-155);
+		floatSetFill(125,125,255, -155,200,-155);
 	} // Lyrics 1
 	else if (beatInRange(73,136)) {
 		if (currBeat == 73.5) {
@@ -299,7 +299,7 @@ void instantEvents() {
 			segSetFill(125,222,75, 75,-125,75);
 			floatSetFill(125,175,255, 125,125,125);
 		}
-	} // Scream trees 3
+	} // Scream trees 2
 	else if (beatInRange(186,192)) {
 		if (currBeat == 186) {
 			for (Plant plant : par) plant.die();

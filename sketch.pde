@@ -11,7 +11,7 @@ static float fillVMult = 0.1;
 static float fftThreshold = 1;
 static float fftPow = 1.7;
 static float fftAmp = 2;
-static float volumeGain = -33;
+static float volumeGain = -9;
 static String songName = "../Music/arewestillyoung.mp3";
 
 IColor defaultFill = new IColor(125,125,125,255);
@@ -28,7 +28,7 @@ void render() {
 	strokeJoin(ROUND);
 	segs.update();
 	if (beatQ) instantEvents();
-	strokeW.v += avg*0.001;
+	strokeW.v += avg*0.003;
 	strokeW.update();
 	strokeWeight(strokeW.x);
 	// text(mobs.size() +  " " + par.size() + " " + far.ar.size() + " " + segs.ar.size() + " ", 0,0);

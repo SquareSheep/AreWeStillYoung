@@ -18,7 +18,7 @@ void lyricsSinWaves() {
 void screamTrees() {
 	t = (float)frameCount/30;
 	for (int o = 0 ; o < 10 ; o ++) far.add(random(-de,de),random(-de,de*0.25),random(-de,0), random(de*0.02,de*0.06)).pv.reset(15*noise(t+10),5*noise(t),25);
-	Plant mob = new Tree(random(-de,de),de*0.25,-de, de*0.15, 0,0,-PI/2, random(4,8), random(0.4,0.8), 2);
+	Plant mob = new Tree(random(-de,de),de*0.25,-de, de*0.15, 0,0,-PI/2, random(4,6), random(0.4,0.8), 2);
 	mob.pv.reset(0,0,25);
 	mob.av.reset(randomR(0.001,0.002),0,0);
 	mobs.add(mob);
@@ -140,18 +140,18 @@ void segSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr,
 	rc *= noise(frameCount*0.07)*0.5+0.5;
 	gc *= noise(frameCount*0.1)*0.5+0.5;
 	bc *= noise(frameCount*0.13)*0.5+0.5;
-	float amp = 0.5;
+	float amp = 0.03;
 	for (int i = 0 ; i < segs.arm ; i ++) {
 		PSeg mob = segs.ar.get(i);
 		temp = (float)frameCount/30;
 		t = (float)i/segs.arm-0.5;
-		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,55, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,100, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
 		mob.strokeStyle.set((rc+rcr*t)*amp,(gc+gcr*t)*amp,(bc+bcr*t)*amp,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
 	}
 }
 
 void segSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr) {
-	float amp = 0.01;
+	float amp = 0.003;
 	segSetFill(rc,gc,bc,rcr,gcr,bcr, rc*amp,bc*amp,gc*amp, rcr*amp,gcr*amp,bcr*amp);
 }
 
@@ -160,18 +160,18 @@ void floatSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr,
 	rc *= noise(frameCount*0.07)*0.5+0.5;
 	gc *= noise(frameCount*0.1)*0.5+0.5;
 	bc *= noise(frameCount*0.13)*0.5+0.5;
-	float amp = 0.5;
+	float amp = 0.03;
 	for (int i = 0 ; i < far.arm ; i ++) {
 		Float mob = far.ar.get(i);
 		temp = (float)frameCount/30;
 		t = (float)i/far.arm;
-		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,55, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
+		mob.fillStyle.set(rc+rcr*t,gc+gcr*t,bc+bcr*t,100, rm+rmr*t,gm+gmr*t,bm+bmr*t,1);
 		mob.strokeStyle.set((rc+rcr*t)*amp,(gc+gcr*t)*amp,(bc+bcr*t)*amp,255, rm+rmr*t,gm+gmr*t,bm+bmr*t,0);
 	}
 }
 
 void floatSetFill(float rc, float gc, float bc, float rcr, float gcr, float bcr) {
-	float amp = 0.01;
+	float amp = 0.003;
 	floatSetFill(rc,gc,bc,rcr,gcr,bcr, rc*amp,bc*amp,gc*amp, rcr*amp,gcr*amp,bcr*amp);
 }
 
